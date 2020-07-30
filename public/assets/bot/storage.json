@@ -27,6 +27,6 @@
     "owners": [],
     "token": "",
     "prefix": "!",
-    "useLowerCase": true
+    "caseSensivate": true
   }
 }

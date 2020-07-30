@@ -287,7 +287,7 @@ class DBCBot {
         const commandArgs = message.content
           .slice(this.storage.config.prefix.length)
           .split(/ +/);
-        const commandName = this.storage.config.useLowerCase ?
+        const commandName = this.storage.config.caseSensivate ?
           commandArgs.shift().toLowerCase() :
           commandArgs.shift();
         const command = this.storage.commands
@@ -408,12 +408,12 @@ class DBCBot {
 
           function throwActionError(
             index, 
-            commandName, 
+            eventName, 
             error
           ) {
             log(
               'error', 
-              `Ocurred on event ${commandName} on action ${index}: ${error}`
+              `Ocurred on event ${eventName} on action ${index}: ${error}`
             );
           }
 
