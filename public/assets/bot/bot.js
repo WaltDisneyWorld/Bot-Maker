@@ -287,7 +287,7 @@ class DBCBot {
         const commandArgs = message.content
           .slice(this.storage.config.prefix.length)
           .split(/ +/);
-        const commandName = this.storage.config.caseSensivate ?
+        const commandName = this.storage.config.caseSensitive ?
           commandArgs.shift().toLowerCase() :
           commandArgs.shift();
         const command = this.storage.commands
