@@ -1,0 +1,109 @@
+<!--! Copyright (c) Discord Bot Creator. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta 
+      http-equiv="Content-Security-Policy" 
+      content="script-src 'self' 'unsafe-inline';"
+    >
+    <meta 
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    >
+    <link 
+      rel="stylesheet" 
+      href="/assets/fonts/inter/inter.css"
+    >
+    <link 
+      rel="stylesheet" 
+      href="/assets/fonts/fira-code/fira-code.css"
+    >
+    <title>Discord Bot Creator</title>
+    <style>
+      :root {
+        --background: #282a36;
+        --dark: #21222c;
+        --gray: #44475a;
+        --white: #fff;
+        --whiteDark: #d1d1d1;
+        --red: #ff5555;
+        --green: #50fa7b;
+        --greenDark: #3bb75c;
+        --yellow: #f1fa8c;
+        --orange: #ffb86c;
+        --purple: #bd93f9;
+        --purpleDark: #ab73ff;
+        --pink: #ff79c6;
+        --pinkDark: #BE5A94;
+        --cyan: #8be9fd;
+        --blue: #6272a4;
+        --textInputBg: #22222C;
+        --textInputColor: #858585;
+        --textInputBgDark: #1c1c23;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlays"></div>
+    <div id="content"></div>
+    <script>
+      const { existsSync } = require('fs');
+      const { homedir } = require('os');
+      const { getCurrentWindow } = require('electron').remote;
+      const Store = require('electron-store');
+
+      const publicPath = (() => {
+        const cwd = process
+          .cwd()
+          .replace(/\\/g, '/'); 
+
+        if (existsSync(cwd + '/src')) {
+          return cwd + '/public';
+        } else {
+          return cwd;
+        }
+      })();
+      const osHomeDir = homedir()
+        .replace(/\\/g, '/');
+
+      window.mainWindow = getCurrentWindow();
+      window.store = new Store();
+      window.env = {
+        DBC_VERSION: process.env.npm_package_version,
+        DBC_PUBLIC_PATH: publicPath,
+        DBC_HOME_PATH: osHomeDir + '/.dbc',
+        DBC_NODE_PATH: (() => {
+          switch (process.platform) {
+            case 'win32':
+              return publicPath + '/assets/node/windows/node.exe';
+            case 'linux':
+              return publicPath + '/assets/node/linux-darwin/bin/node';
+            case 'darwin':
+              return publicPath + '/assets/node/linux-darwin/bin/node';
+            default:
+              break;
+          }
+        })(),
+        DBC_NPM_PATH: (() => {
+          switch (process.platform) {
+            case 'win32':
+              return publicPath + '/assets/node/windows/npm.cmd';
+            case 'linux':
+              return publicPath + '/assets/node/linux-darwin/bin/npm';
+            case 'darwin':
+              return publicPath + '/assets/node/linux-darwin/bin/npm';
+            default:
+              break;
+          }
+        })()
+      };
+
+      document.setTitle = (value) => {
+        document.getElementById('title-bar-title').innerText = value;
+      }
+      document.overlays = document.getElementById('overlays');
+      document.content = document.getElementById('content');
+    </script>
+  </body>
+</html>

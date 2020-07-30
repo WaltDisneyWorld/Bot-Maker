@@ -1,0 +1,39 @@
+/* Copyright (c) Discord Bot Creator. */
+
+* {
+  -webkit-app-region: drag;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #282a36;
+}
+
+#loader {
+  width: 100%;
+  height: 7px;
+  background-color: #bd93f9;
+}
+
+#loader-bar {
+  width: 50px;
+  height: 7px;
+  background-color: #ffffff;
+  animation: 800ms loaderBarMove infinite;
+}
+
+img {
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+@keyframes loaderBarMove {
+  50% {
+    transform: translateX(200px);
+  }
+}

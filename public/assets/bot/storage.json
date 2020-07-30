@@ -1,0 +1,32 @@
+{
+  "commands": [
+    {
+      "name": "dbc",
+      "description": "A simple command that say a message.",
+      "aliases": ["discordbotcreator"],
+      "actions": [
+        {
+          "name": "Send Message",
+          "fields": [
+            {
+              "id": "send-to",
+              "value": "command-channel"
+            },
+            {
+              "id": "message",
+              "value": "${command.author}, welcome to Discord Bot Creator!"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": [],
+  "functions": [],
+  "config": {
+    "owners": [],
+    "token": "",
+    "prefix": "!",
+    "useLowerCase": true
+  }
+}
