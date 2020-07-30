@@ -509,7 +509,7 @@ class DBCBot {
   get utils() {
     return {
       /**
-       * 
+       * A custom console logger.
        * @param {'info' | 'success' | 'error' | 'alert'} type 
        * @param {string} message 
        */
