@@ -1,8 +1,9 @@
 <div align="center">
   <img 
-    src="./public/assets/img/logo.png" 
+    src="./public/img/logo.png" 
     width="200px" 
     height="200px"
+    alt="DBC Logo"
   >
   <h1>
     Discord Bot Creator
