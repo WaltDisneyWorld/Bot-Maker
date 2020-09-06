@@ -1,4 +1,4 @@
-export default interface BotCommand {
+export default interface DBCBotCommand {
   name?: string;
   description?: string;
   aliases?: Array<string>;

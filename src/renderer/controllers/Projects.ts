@@ -5,16 +5,16 @@ import {
 } from 'fs';
 import { exec } from 'child_process';
 
-import Project from '../../interfaces/Project';
+import DBCProject from '../../interfaces/DBCProject';
 
 export default class Projects {
-  private _projects: Array<Project>;
-  private _working: Project;
+  private _projects: Array<DBCProject>;
+  private _working: DBCProject;
 
   constructor() {
     this._projects = window
       .store
-      .get<any, Array<Project>>('projects') || [];
+      .get<any, Array<DBCProject>>('projects') || [];
     this._working = this.projects
       .find(p => p.working === true);
   }
@@ -27,7 +27,7 @@ export default class Projects {
     return this._working;
   }
 
-  set working(project: Project) {
+  set working(project: DBCProject) {
     this._working = project;
   }
 

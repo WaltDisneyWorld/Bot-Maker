@@ -7,7 +7,7 @@ import { ReactComponent as CogsSVG } from '@discord-bot-creator/icons/cogs.svg';
 
 import Bot from '../../../controllers/Bot';
 
-import Project from '../../../../interfaces/Project';
+import DBCProject from '../../../../interfaces/DBCProject';
 
 import ProjectPanelSections from '../../../../types/ProjectPanelSections';
 
@@ -63,7 +63,7 @@ const ProjectPanelMenuContainer = styled.menu`
     cursor: pointer;
     width: 100%;
     padding: 18px;
-    font-size: 14.5px;
+    font-size: 14px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -83,7 +83,7 @@ const ProjectPanelMenuContainer = styled.menu`
 `;
 
 export default function ProjectPanelMenu(props: {
-  project: Project;
+  project: DBCProject;
   bot: Bot;
   section?: ProjectPanelSections;
 }) {

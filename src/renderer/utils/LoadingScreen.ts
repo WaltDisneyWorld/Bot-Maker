@@ -1,4 +1,4 @@
-import loader2 from '../assets/img/loader2.svg';
+import loader2 from '../assets/img/loader.svg';
 
 export default class LoadingScreen {
   private _message: string;

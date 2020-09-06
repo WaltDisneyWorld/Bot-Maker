@@ -2,12 +2,12 @@ import { readFileSync, writeFileSync } from 'fs';
 
 import { Projects } from './';
 
-import Project from '../../interfaces/Project';
-import BotStorage from '../../interfaces/BotStorage';
-import BotConfig from '../../interfaces/BotConfig';
+import DBCProject from '../../interfaces/DBCProject';
+import DBCBotStorage from '../../interfaces/DBCBotStorage';
+import DBCBotConfig from '../../interfaces/DBCBotConfig';
 
 export default class Bot {
-  private _project: Project;
+  private _project: DBCProject;
 
   constructor(projectName: string) {
     this._project = new Projects().projects
@@ -18,7 +18,7 @@ export default class Bot {
     return this._project;
   }
 
-  get storage(): BotStorage {
+  get storage(): DBCBotStorage {
     return JSON.parse(
       readFileSync(
         this.project.path + '/storage.json', 
@@ -27,7 +27,7 @@ export default class Bot {
     );
   }
 
-  editConfig(options: BotConfig): Promise<void> {
+  editConfig(options: DBCBotConfig): Promise<void> {
     return new Promise(resolve => {
       this.storage.config.avatar = 
         options.avatar || 

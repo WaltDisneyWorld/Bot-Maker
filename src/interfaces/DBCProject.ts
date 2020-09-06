@@ -1,4 +1,4 @@
-export default interface Project {
+export default interface DBCProject {
   name?: string;
   path?: string;
   working?: boolean;

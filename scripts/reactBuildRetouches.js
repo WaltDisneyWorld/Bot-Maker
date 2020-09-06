@@ -1,6 +1,6 @@
 const { 
 	unlinkSync, 
-	readdirSync, 
+  readdirSync,
 	copyFileSync 
 } = require('fs');
 

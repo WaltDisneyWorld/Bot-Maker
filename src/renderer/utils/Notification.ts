@@ -1,6 +1,8 @@
 import { remote } from 'electron';
 
-const _Notification = remote.Notification;
+import DBCNotification from '../../interfaces/DBCNotification';
+
+const ElectronNotification = remote.Notification;
 
 export default class Notification {
   constructor(
@@ -14,7 +16,7 @@ export default class Notification {
 
     const notifications = window
       .store
-      .get('notifications') || 
+      .get<any, Array<DBCNotification>>('notifications') || 
       [];
     
     notifications.push({
@@ -81,7 +83,7 @@ export default class Notification {
       `;
 
       const notificationSoundElem = document.createElement('audio');
-      notificationSoundElem.src = '/audios/notification.mp3';
+      notificationSoundElem.src = '/static/media/audios/notification.mp3';
       notificationSoundElem.autoplay = true;
 
       document.body.appendChild(notificationSoundElem);
@@ -110,8 +112,8 @@ export default class Notification {
         }, timeout);
       }
     } else {
-      new _Notification({
-        icon: window.env.DBC_PUBLIC_PATH + '/img/logo.png',
+      new ElectronNotification({
+        icon: window.env.DBC_PUBLIC_PATH + '/static/media/img/logo.png',
         title: 'Discord Bot Creator',
         body: message
       }).show();

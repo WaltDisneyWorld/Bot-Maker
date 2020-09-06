@@ -10,11 +10,11 @@ window.env = {
   DBC_NODE_PATH: (() => {
     switch (process.platform) {
       case 'win32':
-        return process.env.PUBLIC_URL + '/node/windows/node.exe';
+        return process.env.PUBLIC_URL + '/static/node/windows/node.exe';
       case 'linux':
-        return process.env.PUBLIC_URL + '/node/linux-darwin/bin/node';
+        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/node';
       case 'darwin':
-        return process.env.PUBLIC_URL + '/node/linux-darwin/bin/node';
+        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/node';
       default:
         break;
     }
@@ -22,11 +22,11 @@ window.env = {
   DBC_NPM_PATH: (() => {
     switch (process.platform) {
       case 'win32':
-        return process.env.PUBLIC_URL + '/node/windows/npm.cmd';
+        return process.env.PUBLIC_URL + '/static/node/windows/npm.cmd';
       case 'linux':
-        return process.env.PUBLIC_URL + '/node/linux-darwin/bin/npm';
+        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/npm';
       case 'darwin':
-        return process.env.PUBLIC_URL + '/node/linux-darwin/bin/npm';
+        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/npm';
       default:
         break;
     }

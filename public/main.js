@@ -12,7 +12,7 @@ const serve = require('electron-serve');
 
 const DBCServeURL = serve({
   scheme: 'dbc', 
-  directory: __dirname 
+  directory: __dirname
 });
 
 function DBCIsProd() {
@@ -34,7 +34,7 @@ function DBCIsProd() {
     center: true,
     frame: false,
     resizable: false,
-    icon: __dirname + '/img/logo.png',
+    icon: __dirname + '/static/media/img/logo.png',
     title: 'Loading | Discord Bot Creator',
     width: 250,
     height: 250,
@@ -42,7 +42,7 @@ function DBCIsProd() {
   });
 
   loadWindow.removeMenu();
-  loadWindow.loadFile(__dirname + '/views/loading/index.html');
+  loadWindow.loadFile(__dirname + '/static/views/load/index.html');
 
   loadWindow.webContents
     .once('did-finish-load', async () => {
@@ -52,7 +52,7 @@ function DBCIsProd() {
         show: false,
         center: true,
         frame: false,
-        icon: __dirname + '/img/logo.png',
+        icon: __dirname + '/static/media/img/logo.png',
         title: 'Discord Bot Creator',
         width: 800,
         height: 550,
@@ -69,7 +69,6 @@ function DBCIsProd() {
       if (!DBCIsProd()) {
         mainWindow.loadURL('http://localhost:3000');
       } else {
-        mainWindow.removeMenu();
         await DBCServeURL(mainWindow);
         mainWindow.loadURL('dbc://index.html');
       }
