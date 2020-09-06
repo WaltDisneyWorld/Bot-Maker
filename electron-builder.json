@@ -10,18 +10,9 @@
   },
   "extends": null,
   "win": {
-    "icon": "assets/img/logo.ico",
+    "icon": "img/logo.ico",
     "target": [
       "nsis"
-    ]
-  },
-  "linux": {
-    "icon": "assets/img/logo.png",
-    "category": "Development",
-    "target": [
-      "AppImage",
-      "deb",
-      "rpm"
     ]
   },
   "nsis": {

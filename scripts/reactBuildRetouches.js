@@ -1,7 +1,7 @@
 const { 
-  unlinkSync, 
-  readdirSync, 
-  copyFileSync 
+	unlinkSync, 
+	readdirSync, 
+	copyFileSync 
 } = require('fs');
 
 unlinkSync('./build/service-worker.js');
@@ -10,4 +10,7 @@ unlinkSync(
     .find(f => f.startsWith('precache'))
 );
 unlinkSync('./build/asset-manifest.json');
-copyFileSync('./LICENSE', './build/LICENSE');
+copyFileSync(
+  './custom.webpack.config.js', 
+  './node_modules/react-scripts/config/webpack.config.js'
+);

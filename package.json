@@ -2,49 +2,47 @@
   "name": "discord-bot-creator",
   "description": "A free open-source tool to create Discord Bots.",
   "version": "1.0.0",
-  "main": "build/index.js",
+  "main": "build/main.js",
   "homepage": "https://discord-bot-creator.github.io",
   "license": "GPL-3.0",
   "author": {
     "name": "Cap",
-    "email": "cap.oliveira@aol.com"
+    "email": "cap.contact@aol.com"
   },
   "repository": {
-    "url": "https://github.com/discord-bot-creator/program"
+    "type": "git",
+    "url": "https://github.com/discord-bot-creator/discord-bot-creator.git"
   },
   "bugs": {
-    "url": "https://github.com/discord-bot-creator/program/issues"
+    "url": "https://github.com/discord-bot-creator/discord-bot-creator/issues"
   },
   "scripts": {
     "dev": "node scripts/dev",
-    "build": "electron-builder --win --linux --x64 --ia32",
+    "build": "react-scripts build && node scripts/reactBuildRetouches && electron-builder --win --x64 --ia32",
     "build:react": "react-scripts build && node scripts/reactBuildRetouches",
-    "build:win": "electron-builder --win --x64 --ia32",
-    "build:linux": "electron-builder --linux --x64"
+    "build:win": "electron-builder --win --x64 --ia32"
   },
   "dependencies": {
+    "@discord-bot-creator/bot": "^1.0.4",
+    "@discord-bot-creator/icons": "^1.0.4",
     "electron-serve": "^1.0.0",
-    "electron-store": "^5.2.0"
+    "electron-store": "^6.0.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
-    "electron": "^9.1.1",
+    "electron": "^10.1.0",
     "electron-builder": "^22.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
-    "react-tooltip": "^4.2.7",
     "sortablejs": "^1.10.2",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2"
+    "typescript": "^4.0.2"
   },
   "eslintConfig": {
     "extends": "react-app"

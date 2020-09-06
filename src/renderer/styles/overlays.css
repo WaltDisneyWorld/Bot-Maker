@@ -1,0 +1,32 @@
+#dialog {
+  z-index: 50;
+  min-width: 350px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background-color: var(--dialogBg);
+}
+
+#dialog > div:nth-child(1) {
+  padding: 18px;
+}
+
+#dialog > div:nth-child(1) h2 {
+  margin-bottom: 10px;
+}
+
+#dialog > div:nth-child(1) div {
+  font-size: 15px;
+  color: var(--dialogContentColor);
+}
+
+#dialog > div:nth-child(2) {
+  padding: 15px;
+  background-color: var(--dialogButtonsBg);
+}
+
+#dialog > div:nth-child(2) button {
+  width: 70px;
+}

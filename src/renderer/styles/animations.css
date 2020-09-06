@@ -1,0 +1,31 @@
+.fadeIn-200 {
+  animation: fadeIn 200ms backwards;
+}
+
+.fadeOut-200 {
+  animation: fadeOut 200ms forwards;
+}
+
+.fadeIn-500 {
+  animation: fadeIn 500ms backwards;
+}
+
+.fadeOut-500 {
+  animation: fadeOut 500ms forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  } to {
+    opacity: 0;
+  }
+}
