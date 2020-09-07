@@ -8,7 +8,6 @@
   "directories": {
     "buildResources": "build"
   },
-  "asar": false,
   "extends": null,
   "win": {
     "icon": "static/media/img/logo.ico",
