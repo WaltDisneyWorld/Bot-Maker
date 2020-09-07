@@ -1,6 +1,6 @@
 <div align="center">
   <img 
-    src="./public/img/logo.png" 
+    src="./public/static/media/img/logo.png" 
     width="200px" 
     height="200px"
     alt="DBC Logo"
