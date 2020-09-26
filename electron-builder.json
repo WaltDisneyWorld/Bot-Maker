@@ -1,18 +1,20 @@
 {
-  "appId": "com.cap.discord-bot-creator",
+  "appId": "com.discord-bot-creator.discord-bot-creator",
   "productName": "Discord Bot Creator",
-  "copyright": "Copyright © 2020 Cap",
-  "files": [ 
+  "copyright": "Copyright © 2020 Discord Bot Creator",
+  "files": [
+    "./main.js",
+    "./LICENSE",
     "./build/**/*"
   ],
   "directories": {
-    "buildResources": "build"
+    "buildResources": "./build"
   },
   "extends": null,
   "win": {
     "icon": "static/media/img/logo.ico",
     "target": [
-      "nsis"
+      "zip"
     ]
   },
   "nsis": {

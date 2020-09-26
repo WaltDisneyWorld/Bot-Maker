@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const IndexContainer = styled.div`
   width: 100%;
@@ -16,8 +16,13 @@ const IndexContainer = styled.div`
     height: 250px;
   }
 
-  h1 {
+  div:nth-child(2) h1 {
     font-size: 38px;
+  }
+
+  div:nth-child(2) h1 span {
+    font-size: 11px;
+    color: #989898;
   }
 
   div:nth-child(2) div {
@@ -30,6 +35,11 @@ const IndexContainer = styled.div`
     margin-right: 10px;
     font-size: 13px;
   }
-`;
 
-export default IndexContainer;
+  div:nth-child(2) button svg {
+    width: 13px;
+    height: 13px;
+  }
+`
+
+export default IndexContainer

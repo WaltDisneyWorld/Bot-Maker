@@ -1,7 +1,3 @@
-type ProjectPanelSections = 
-  'commands' | 
-  'events' | 
-  'config' | 
-  undefined;
+type ProjectPanelSections = 'commands' | 'events' | 'config' | undefined
 
-export default ProjectPanelSections;
+export default ProjectPanelSections

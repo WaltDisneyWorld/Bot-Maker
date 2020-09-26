@@ -1,5 +1,5 @@
 export default interface DBCProject {
-  name?: string;
-  path?: string;
-  working?: boolean;
+  name?: string
+  path?: string
+  working?: boolean
 }

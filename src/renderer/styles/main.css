@@ -1,8 +1,6 @@
 @import url('./theme.css');
 @import url('./overlays.css');
-@Import url('./animations.css');
-@import url('../assets/fonts/inter/inter.css');
-@import url('../assets/fonts/fira-code/fira-code.css');
+@import url('./animations.css');
 
 * {
   margin: 0;
@@ -20,7 +18,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--purple);
+  background-color: var(--main);
 }
 
 button {
@@ -28,14 +26,14 @@ button {
 }
 
 a {
-  color: var(--purple);
+  color: var(--main);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--purpleDark);
+  text-decoration: underline;
 }
 
 svg {
-  fill: var(--white);
+  fill: var(--svgColor);
 }

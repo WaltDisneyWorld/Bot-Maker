@@ -1,18 +1,15 @@
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import React, { StrictMode } from 'react'
+import ReactDOM from 'react-dom'
 
-import TitleBar from './components/TitleBar';
-import Routes from './Routes';
+import TitleBar from './components/TitleBar'
+import Routes from './Routes'
 
-import './styles/main.css';
+import './styles/main.css'
 
-ReactDOM.render(
-  <TitleBar />,
-  document.getElementById('overlays')
-);
+ReactDOM.render(<TitleBar />, document.getElementById('overlays'))
 ReactDOM.render(
   <StrictMode>
     <Routes />
   </StrictMode>,
   document.getElementById('content')
-);
+)

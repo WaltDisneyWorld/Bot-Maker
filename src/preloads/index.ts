@@ -1,2 +1,2 @@
-import './window';
-import './document';
+import './window'
+import './document'

@@ -1,9 +1,5 @@
-import Notification from './Notification';
-import Dialog from './Dialog';
-import LoadingScreen from './LoadingScreen';
+import Notification from './Notification'
+import Dialog from './Dialog'
+import LoadingScreen from './LoadingScreen'
 
-export {
-  Notification,
-  Dialog,
-  LoadingScreen
-};
+export { Notification, Dialog, LoadingScreen }

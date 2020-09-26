@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const ProjectPanelContainer = styled.div`
   display: flex;
@@ -8,6 +8,6 @@ const ProjectPanelContainer = styled.div`
     margin-top: 10px;
     margin-left: 15px;
   }
-`;
+`
 
-export default ProjectPanelContainer;
+export default ProjectPanelContainer

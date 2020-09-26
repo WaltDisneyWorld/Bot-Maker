@@ -1,3 +1,3 @@
-import Store from 'electron-store';
+import Store from 'electron-store'
 
-window.store = new Store()!;
+window.store = new Store()!

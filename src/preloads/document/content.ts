@@ -1,1 +1,1 @@
-document.content = document.getElementById('content');
+document.content = document.getElementById('content')

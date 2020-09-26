@@ -1,34 +1,34 @@
-import { homedir } from 'os';
+import { homedir } from 'os'
+import { remote } from 'electron'
+import { existsSync, readFileSync } from 'fs'
 
-const osHomeDir = homedir()
-  .replace(/\\/g, '/');
+const { app } = remote
+const { getAppPath } = app
+
+const homeDir = homedir().replace(/\\/g, '/') + '/.dbc'
+const appPath = existsSync(getAppPath() + '/src')
+  ? getAppPath()
+  : getAppPath().endsWith('app.asar')
+  ? getAppPath()
+  : process.cwd()
+const staticPath = existsSync(appPath + '/src')
+  ? appPath + '/static'
+  : appPath.endsWith('app.asar')
+  ? appPath + '/build/static'
+  : appPath
 
 window.env = {
-  DBC_VERSION: process.env.npm_package_version,
-  DBC_PUBLIC_PATH: process.env.PUBLIC_URL,
-  DBC_HOME_PATH: osHomeDir + '/.dbc',
-  DBC_NODE_PATH: (() => {
-    switch (process.platform) {
-      case 'win32':
-        return process.env.PUBLIC_URL + '/static/node/windows/node.exe';
-      case 'linux':
-        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/node';
-      case 'darwin':
-        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/node';
-      default:
-        break;
-    }
-  })(),
-  DBC_NPM_PATH: (() => {
-    switch (process.platform) {
-      case 'win32':
-        return process.env.PUBLIC_URL + '/static/node/windows/npm.cmd';
-      case 'linux':
-        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/npm';
-      case 'darwin':
-        return process.env.PUBLIC_URL + '/static/node/linux-darwin/bin/npm';
-      default:
-        break;
-    }
-  })()
-};
+  DBC_VERSION: JSON.parse(readFileSync(appPath + '/package.json', 'utf-8'))
+    .version,
+  DBC_APP_PATH: appPath,
+  DBC_STATIC_PATH: staticPath,
+  DBC_HOME_PATH: homeDir,
+  DBC_NODE_PATH:
+    process.platform === 'win32'
+      ? homeDir + '/node/node.exe'
+      : homeDir + '/node/bin/node',
+  DBC_NPM_PATH:
+    process.platform === 'win32'
+      ? homeDir + '/node/npm.cmd'
+      : homeDir + '/node/bin/npm'
+}

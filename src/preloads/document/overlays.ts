@@ -1,1 +1,1 @@
-document.overlays = document.getElementById('overlays');
+document.overlays = document.getElementById('overlays')

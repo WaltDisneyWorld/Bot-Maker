@@ -1,11 +1,11 @@
-import './setTitle';
-import './overlays';
-import './content';
+import './setTitle'
+import './overlays'
+import './content'
 
 declare global {
   interface Document {
-    setTitle(value: string): void;
-    overlays: HTMLElement;
-    content: HTMLElement;
+    setTitle(value: string): void
+    overlays: HTMLElement
+    content: HTMLElement
   }
 }

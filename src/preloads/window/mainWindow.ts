@@ -1,5 +1,5 @@
-import { remote } from 'electron';
+import { remote } from 'electron'
 
-const { getCurrentWindow } = remote;
+const { getCurrentWindow } = remote
 
-window.mainWindow = getCurrentWindow();
+window.mainWindow = getCurrentWindow()

@@ -1,12 +1,12 @@
 export default interface BotEvent {
-  name?: string;
-  type?: string;
-  outputs?: Array<string>;
+  name?: string
+  type?: string
+  outputs?: Array<string>
   actions?: Array<{
-    name: string;
+    name: string
     fields: Array<{
-      id: string;
-      value: string;
-    }>;
-  }>;
+      id: string
+      value: string
+    }>
+  }>
 }

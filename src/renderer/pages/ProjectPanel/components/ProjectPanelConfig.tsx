@@ -1,7 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export default function ProjectPanelConfig() {
-  return (
-    <h1>Hello 3</h1>
-  );
+  return <h1>Hello 3</h1>
 }

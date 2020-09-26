@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const CreatingProjectContainer = styled.div`
   width: 80%;
@@ -37,7 +37,7 @@ const CreatingProjectContainer = styled.div`
     margin-top: 15px;
     margin-left: 15px;
     border-radius: 100%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 
   #field:nth-child(5) {
@@ -63,15 +63,14 @@ const CreatingProjectContainer = styled.div`
 
   > button {
     width: 100%;
-    height: 43px;
     margin-top: 30px;
+    padding: 15px;
   }
 
   > button svg {
-    width: 14px;
-    height: 14px;
-    fill: #000;
+    width: 13px;
+    height: 13px;
   }
-`;
+`
 
-export default CreatingProjectContainer;
+export default CreatingProjectContainer
