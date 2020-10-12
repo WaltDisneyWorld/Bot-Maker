@@ -36,6 +36,7 @@ async function verifyDBCNode (version) {
     return new Promise(async (resolve) => {
       try {
         if (!existsSync(homeDir)) await mkdir(homeDir)
+        
         https.get(
           process.platform === 'win32'
             ? `https://nodejs.org/dist/v${version}/node-v${version}-win-x64.zip`
