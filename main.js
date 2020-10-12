@@ -63,9 +63,7 @@ async function startDBC () {
             public: __dirname + '/build'
           })
         })
-        .listen(40000, () => {
-          mainWindow.loadURL('http://localhost:40000')
-        })
+        .listen(40000, () => mainWindow.loadURL('http://localhost:40000'))
     }
     mainWindow.webContents.once('did-finish-load', () => {
       loadWindow.close()
