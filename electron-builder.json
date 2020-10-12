@@ -21,7 +21,6 @@
     "license": "./LICENSE",
     "oneClick": false,
     "allowToChangeInstallationDirectory": true,
-    "createDesktopShortcut": false,
     "runAfterFinish": false
   }
 }
