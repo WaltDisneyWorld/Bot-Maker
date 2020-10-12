@@ -14,7 +14,8 @@
   "win": {
     "icon": "static/media/img/logo.ico",
     "target": [
-      "zip"
+      "zip",
+      "nsis"
     ]
   },
   "nsis": {
