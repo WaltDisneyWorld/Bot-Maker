@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from 'fs'
 const { app } = remote
 const { getAppPath } = app
 
-const homeDir = homedir().replace(/\\/g, '/') + '/.dbc'
+const homeDir = homedir() + '/.dbc'
 const appPath = existsSync(getAppPath() + '/src')
   ? getAppPath()
   : getAppPath().endsWith('app.asar')

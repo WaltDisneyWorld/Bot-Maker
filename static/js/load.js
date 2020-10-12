@@ -78,8 +78,9 @@ async function verifyDBCNode (version) {
       }
     })
   }
+  
   if (!existsSync(homeDir + '/node')) {
-    setLoadMessage('Installing dependencies')
+    setLoadMessage('Downloading dependencies')
     await downloadNode(version)
   } else if (store.get('nodeVersion') !== version) {
     setLoadMessage('Updating dependencies')
