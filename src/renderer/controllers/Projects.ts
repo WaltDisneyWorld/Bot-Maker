@@ -7,7 +7,7 @@ export default class Projects {
   private _projects: Array<DBCProject>
   private _working: DBCProject
 
-  constructor () {
+  constructor() {
     this._projects = window.store.get<any, Array<DBCProject>>('projects') || []
 
     if (this.projects.find((p) => p.working === true)) {
@@ -20,19 +20,19 @@ export default class Projects {
     }
   }
 
-  get projects () {
+  get projects() {
     return this._projects
   }
 
-  get working () {
+  get working() {
     return this._working
   }
 
-  set working (project: DBCProject) {
+  set working(project: DBCProject) {
     this._working = project
   }
 
-  create (name: string, path: string): Promise<void | string> {
+  create(name: string, path: string): Promise<void | string> {
     return new Promise((resolve, reject) => {
       path = path.replace(/\\/g, '/')
 
@@ -94,7 +94,7 @@ export default class Projects {
     })
   }
 
-  edit (name: string, options: DBCProject): void | string {
+  edit(name: string, options: DBCProject): void | string {
     const project = this.projects.find((p) => p.name === name)
     if (!project) return 'NON_EXISTENT_PROJECT'
     this.projects[this.projects.indexOf(project)] = {
@@ -105,7 +105,7 @@ export default class Projects {
     window.store.set('projects', this.projects)
   }
 
-  remove (name: string): void | string {
+  remove(name: string): void | string {
     const project = this.projects.find((p) => p.name === name)
     if (!project) return 'NON_EXISTENT_PROJECT'
     this.projects.splice(this.projects.indexOf(project))

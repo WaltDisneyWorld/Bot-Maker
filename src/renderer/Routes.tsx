@@ -5,7 +5,7 @@ import Index from './pages/Index'
 import CreatingProject from './pages/CreatingProject'
 import ProjectPanel from './pages/ProjectPanel'
 
-export default function Routes () {
+export default function Routes() {
   return (
     <Router>
       <Switch>

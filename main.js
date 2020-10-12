@@ -16,7 +16,7 @@ const DBCStaticPath = existsSync(__dirname + '/src')
   ? __dirname + '/static'
   : __dirname + '/build/static'
 
-async function startDBC () {
+async function startDBC() {
   await app.whenReady()
 
   const loadWindow = new BrowserWindow({

@@ -1,5 +1,5 @@
 export default class Dialog {
-  static create (title: string, content: string): Promise<void> {
+  static create(title: string, content: string): Promise<void> {
     return new Promise((resolve) => {
       if (!document.getElementById('dialog')) {
         const dialogElem = document.createElement('div')
@@ -33,7 +33,7 @@ export default class Dialog {
     })
   }
 
-  static close (): Promise<void> {
+  static close(): Promise<void> {
     return new Promise((resolve) => {
       if (document.getElementById('dialog')) {
         const dialogElem = document.getElementById('dialog')

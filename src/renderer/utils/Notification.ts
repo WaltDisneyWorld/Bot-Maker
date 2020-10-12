@@ -12,7 +12,7 @@ const closeSVG = readFileSync(
 )
 
 export default class Notification {
-  static create (
+  static create(
     type: 'info' | 'success' | 'error' | 'alert',
     message: string,
     timeout?: number
@@ -75,7 +75,7 @@ export default class Notification {
     })
   }
 
-  static close (): Promise<void> {
+  static close(): Promise<void> {
     return new Promise((resolve) => {
       if (document.getElementById('notification')) {
         const notificationElem = document.getElementById('notification')

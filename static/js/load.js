@@ -27,16 +27,16 @@ const homeDir = homedir() + '/.dbc'
 const store = new Store()
 const loadWindow = getCurrentWindow()
 
-function setLoadMessage (message) {
+function setLoadMessage(message) {
   document.querySelector('h5').innerText = message
 }
 
-async function verifyDBCNode (version) {
-  function downloadNode (version) {
+async function verifyDBCNode(version) {
+  function downloadNode(version) {
     return new Promise(async (resolve) => {
       try {
         if (!existsSync(homeDir)) await mkdir(homeDir)
-        
+
         https.get(
           process.platform === 'win32'
             ? `https://nodejs.org/dist/v${version}/node-v${version}-win-x64.zip`
@@ -88,5 +88,4 @@ async function verifyDBCNode (version) {
   }
 }
 
-await verifyDBCNode('12.18.4')
-ipcRenderer.send('dbc-load')
+verifyDBCNode('12.18.4').then(() => ipcRenderer.send('dbc-load'))
