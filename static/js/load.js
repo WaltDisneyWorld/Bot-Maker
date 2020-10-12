@@ -31,66 +31,61 @@ function setLoadMessage (message) {
   document.querySelector('h5').innerText = message
 }
 
-window.onload = async () => {
-  async function verifyDBCNode (version) {
-    function downloadNode (version) {
-      return new Promise(async (resolve) => {
-        try {
-          if (!existsSync(homeDir)) await mkdir(homeDir)
-
-          https.get(
-            process.platform === 'win32'
-              ? `https://nodejs.org/dist/v${version}/node-v${version}-win-x64.zip`
-              : process.platform === 'linux'
-              ? `https://nodejs.org/dist/v${version}/node-v${version}-linux-x64.zip`
-              : `https://nodejs.org/dist/v${version}/node-v${version}-darwin-x64.tar.gz`,
-            (res) => {
-              const nodeFilePath =
-                process.platform === 'win32'
-                  ? homeDir + '/node.zip'
-                  : homeDir + '/node.tar.gz'
-              const nodeFile = createWriteStream(nodeFilePath)
-
-              res.pipe(nodeFile)
-              res.once('error', (err) => {
-                alert('Unknown error: ' + err)
-                loadWindow.close()
-              })
-              res.once('end', async () => {
-                await decompress(nodeFilePath, homeDir)
-                await unlink(nodeFilePath)
-                await rename(
-                  homeDir +
-                    '/' +
-                    readdirSync(homeDir).find((i) => i.startsWith('node')),
-                  homeDir + '/node'
-                )
-                store.set('nodeVersion', version)
-                resolve()
-              })
-            }
-          )
-        } catch (err) {
-          alert(
-            err.code === 'ENOTFOUND'
-              ? 'Not was possible install the required depedencies, check if your connection is ok.'
-              : 'Unknown error: ' + err
-          )
-          loadWindow.close()
-        }
-      })
-    }
-
-    if (!existsSync(homeDir + '/node')) {
-      setLoadMessage('Installing dependencies')
-      await downloadNode(version)
-    } else if (store.get('nodeVersion') !== version) {
-      setLoadMessage('Updating dependencies')
-      rmdirSync(homeDir + '/node', { recursive: true })
-      await downloadNode(version)
-    }
+async function verifyDBCNode (version) {
+  function downloadNode (version) {
+    return new Promise(async (resolve) => {
+      try {
+        if (!existsSync(homeDir)) await mkdir(homeDir)
+        https.get(
+          process.platform === 'win32'
+            ? `https://nodejs.org/dist/v${version}/node-v${version}-win-x64.zip`
+            : process.platform === 'linux'
+            ? `https://nodejs.org/dist/v${version}/node-v${version}-linux-x64.zip`
+            : `https://nodejs.org/dist/v${version}/node-v${version}-darwin-x64.tar.gz`,
+          (res) => {
+            const nodeFilePath =
+              process.platform === 'win32'
+                ? homeDir + '/node.zip'
+                : homeDir + '/node.tar.gz'
+            const nodeFile = createWriteStream(nodeFilePath)
+            res.pipe(nodeFile)
+            res.once('error', (err) => {
+              alert('Unknown error: ' + err)
+              loadWindow.close()
+            })
+            res.once('end', async () => {
+              await decompress(nodeFilePath, homeDir)
+              await unlink(nodeFilePath)
+              await rename(
+                homeDir +
+                  '/' +
+                  readdirSync(homeDir).find((i) => i.startsWith('node')),
+                homeDir + '/node'
+              )
+              store.set('nodeVersion', version)
+              resolve()
+            })
+          }
+        )
+      } catch (err) {
+        alert(
+          err.code === 'ENOTFOUND'
+            ? 'Not was possible install the required depedencies, check if your connection is ok.'
+            : 'Unknown error: ' + err
+        )
+        loadWindow.close()
+      }
+    })
   }
-
-  await verifyDBCNode('12.18.4')
-  ipcRenderer.send('dbc-load')
+  if (!existsSync(homeDir + '/node')) {
+    setLoadMessage('Installing dependencies')
+    await downloadNode(version)
+  } else if (store.get('nodeVersion') !== version) {
+    setLoadMessage('Updating dependencies')
+    rmdirSync(homeDir + '/node', { recursive: true })
+    await downloadNode(version)
+  }
 }
+
+await verifyDBCNode('12.18.4')
+ipcRenderer.send('dbc-load')
