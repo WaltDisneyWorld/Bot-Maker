@@ -10,7 +10,7 @@ import { Projects } from '../../controllers'
 
 import logo from '../../assets/img/logo.png'
 
-export default function IndexPage() {
+export default function IndexPage () {
   document.setTitle('Discord Bot Creator')
 
   const history = useHistory()

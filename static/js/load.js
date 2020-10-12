@@ -27,12 +27,12 @@ const homeDir = homedir() + '/.dbc'
 const store = new Store()
 const loadWindow = getCurrentWindow()
 
-function setLoadMessage(message) {
+function setLoadMessage (message) {
   document.querySelector('h5').innerText = message
 }
 
-async function verifyDBCNode(version) {
-  function downloadNode(version) {
+async function verifyDBCNode (version) {
+  function downloadNode (version) {
     return new Promise(async (resolve) => {
       try {
         if (!existsSync(homeDir)) await mkdir(homeDir)

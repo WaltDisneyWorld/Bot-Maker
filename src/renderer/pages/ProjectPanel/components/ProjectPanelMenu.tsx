@@ -81,7 +81,7 @@ const ProjectPanelMenuContainer = styled.menu`
   }
 `
 
-export default function ProjectPanelMenu(props: {
+export default function ProjectPanelMenu (props: {
   project: DBCProject
   bot: Bot
   section?: ProjectPanelSections

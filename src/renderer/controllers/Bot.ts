@@ -9,21 +9,21 @@ import DBCBotConfig from '../../interfaces/DBCBotConfig'
 export default class Bot {
   private _project: DBCProject
 
-  constructor(projectName: string) {
+  constructor (projectName: string) {
     this._project = new Projects().projects.find((p) => p.name === projectName)
   }
 
-  get project() {
+  get project () {
     return this._project
   }
 
-  get storage(): DBCBotStorage {
+  get storage (): DBCBotStorage {
     return JSON.parse(
       readFileSync(this.project.path + '/storage.json', 'utf-8')
     )
   }
 
-  editConfig(options: DBCBotConfig): Promise<void> {
+  editConfig (options: DBCBotConfig): Promise<void> {
     return new Promise((resolve) => {
       this.storage.config.avatar = options.avatar || this.storage.config.avatar
       this.storage.config.description =

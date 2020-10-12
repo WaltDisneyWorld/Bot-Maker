@@ -8,15 +8,15 @@ const loaderSVG = readFileSync(
 export default class LoadingScreen {
   private _message: string
 
-  constructor() {
+  constructor () {
     this._message = ''
   }
 
-  get message() {
+  get message () {
     return this._message
   }
 
-  set message(value: string) {
+  set message (value: string) {
     if (document.getElementById('loading-screen')) {
       const loadingScreenMessageElem = document.querySelector<HTMLSpanElement>(
         '#loading-screen span'
@@ -33,7 +33,7 @@ export default class LoadingScreen {
     }
   }
 
-  create(message: string): Promise<void> {
+  create (message: string): Promise<void> {
     return new Promise((resolve) => {
       if (!document.getElementById('loading-screen')) {
         const loadingScreenElem = document.createElement('div')
@@ -58,7 +58,7 @@ export default class LoadingScreen {
     })
   }
 
-  close(): Promise<void> {
+  close (): Promise<void> {
     return new Promise((resolve) => {
       if (document.getElementById('loading-screen')) {
         const loadingScreenElem = document.getElementById('loading-screen')
