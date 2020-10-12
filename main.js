@@ -7,8 +7,7 @@
  * @license
  */
 
-const { app, BrowserWindow } = require('electron')
-const { ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const { existsSync } = require('fs')
 const http = require('http')
 const handler = require('serve-handler')
@@ -17,7 +16,7 @@ const DBCStaticPath = existsSync(__dirname + '/src')
   ? __dirname + '/static'
   : __dirname + '/build/static'
 
-async function startDBC() {
+async function startDBC () {
   await app.whenReady()
 
   const loadWindow = new BrowserWindow({
@@ -40,7 +39,7 @@ async function startDBC() {
     show: false,
     center: true,
     frame: false,
-    icon: __dirname + '/media/img/logo.png',
+    icon: DBCStaticPath + '/media/img/logo.png',
     title: 'Discord Bot Creator',
     width: 800,
     height: 550,
@@ -54,7 +53,7 @@ async function startDBC() {
     }
   })
 
-  ipcMain.on('dbc-load', async () => {
+  ipcMain.once('dbc-load', async () => {
     if (existsSync(__dirname + '/src')) {
       mainWindow.loadURL('http://localhost:3000')
     } else {

@@ -4,9 +4,7 @@ const glob = require('glob')
 const minify = require('@node-minify/core')
 const htmlMinifier = require('@node-minify/html-minifier')
 const cssnano = require('@node-minify/cssnano')
-const uglifyES = require('@node-minify/uglify-es')
-
-(async () => {
+const uglifyES = require('@node-minify/uglify-es')(async () => {
   await copy(
     './scripts/requirements/paths.js',
     './node_modules/react-scripts/config/paths.js'

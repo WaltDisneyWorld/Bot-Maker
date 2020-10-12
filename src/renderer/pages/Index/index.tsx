@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { ReactComponent as PlusSVG } from '@discord-bot-creator/icons/plus.svg'
 import { ReactComponent as FolderSVG } from '@discord-bot-creator/icons/folder.svg'
@@ -10,9 +10,7 @@ import { Projects } from '../../controllers'
 
 import logo from '../../assets/img/logo.png'
 
-useState()
-
-export default function IndexPage() {
+export default function IndexPage () {
   document.setTitle('Discord Bot Creator')
 
   const history = useHistory()

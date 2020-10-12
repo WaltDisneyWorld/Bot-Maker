@@ -19,7 +19,7 @@
   "scripts": {
     "dev:react": "node scripts/reactDev",
     "dev:electron": "electron main",
-    "lint": "eslint static/**/*.js scripts/**/*.js src/**/*.ts src/**/*.tsx --fix && prettier --write main.js && prettier --write src && prettier --write static && prettier --write scripts",
+    "format": "prettier --write main.js && prettier --write src && prettier --write static && prettier --write scripts && eslint --fix main.js static/**/*.js src/**/*.ts src/**/*.tsx scripts/**/*.js",
     "build": "node scripts/reactBuild && electron-builder --win --x64",
     "build:react": "node scripts/reactBuild",
     "build:win": "electron-builder --win --x64"

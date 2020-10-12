@@ -157,12 +157,12 @@ const TitleBarContainer = styled.div`
   }
 `
 
-export default function TitleBar() {
+export default function TitleBar () {
   const [winIsMaximized, setWinIsMaximized] = useState(
     window.mainWindow.isMaximized()
   )
 
-  function handleMaxUnWindow() {
+  function handleMaxUnWindow () {
     if (window.mainWindow.isMaximized()) {
       window.mainWindow.unmaximize()
     } else {

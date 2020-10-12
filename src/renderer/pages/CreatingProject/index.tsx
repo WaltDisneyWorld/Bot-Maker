@@ -15,7 +15,7 @@ import { LoadingScreen, Dialog } from '../../utils'
 
 const { dialog } = remote
 
-export default function CreatingProjectPage() {
+export default function CreatingProjectPage () {
   document.setTitle('Creating Project | Discord Bot Creator')
 
   const [projectAvatar, setProjectAvatar] = useState(
@@ -29,7 +29,7 @@ export default function CreatingProjectPage() {
 
   const history = useHistory()
 
-  async function handleSearchPath() {
+  async function handleSearchPath () {
     const pathResult = await dialog.showOpenDialog({
       properties: ['openDirectory']
     })
@@ -37,7 +37,7 @@ export default function CreatingProjectPage() {
     setProjectPath(pathResult.filePaths[0])
   }
 
-  async function handleCreateProject(
+  async function handleCreateProject (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.persist()

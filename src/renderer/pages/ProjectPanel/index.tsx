@@ -10,7 +10,7 @@ import ProjectPanelSections from '../../../types/ProjectPanelSections'
 
 import { Projects, Bot } from '../../controllers'
 
-export default function ProjectPanel(props: {
+export default function ProjectPanel (props: {
   section?: ProjectPanelSections
 }) {
   const { section } = props
