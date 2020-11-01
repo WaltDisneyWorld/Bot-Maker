@@ -73,7 +73,6 @@ const Button = styled.button<{
         };
       }
     `}
-  transition: background-color 100ms, color 100ms, box-shadow 100ms;
 
   ${(props) =>
     props.outlined
@@ -104,10 +103,6 @@ const Button = styled.button<{
       }
     `
       : `
-      :hover {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-      }
-
       :active {
         background-color: ${
           props.white
@@ -136,7 +131,6 @@ const Button = styled.button<{
 
   svg {
     margin-right: 10px;
-    transition: fill 100ms;
   }
 `
 

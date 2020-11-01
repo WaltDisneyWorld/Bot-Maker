@@ -1,40 +1,32 @@
 import React, { useState } from 'react'
+import { homedir } from 'os'
 import { useHistory } from 'react-router-dom'
-import { remote } from 'electron'
+import { ipcRenderer, OpenDialogReturnValue } from 'electron'
 import { ReactComponent as CubeSVG } from '@discord-bot-creator/icons/cube.svg'
 import { ReactComponent as SearchSVG } from '@discord-bot-creator/icons/search.svg'
 import { ReactComponent as PlusSVG } from '@discord-bot-creator/icons/plus.svg'
+
+import { LoadingScreen, Dialog } from '../../utils'
+
+import { Projects } from '../../controllers'
 
 import CreatingProjectContainer from './components/CreatingProjectContainer'
 import TextInput from '../../components/TextInput'
 import Button from '../../components/Button'
 
-import { Projects, Bot } from '../../controllers'
-
-import { LoadingScreen, Dialog } from '../../utils'
-
-const { dialog } = remote
-
 export default function CreatingProjectPage () {
   document.setTitle('Creating Project | Discord Bot Creator')
 
-  const [projectAvatar, setProjectAvatar] = useState(
-    'https://i.imgur.com/3RzaW3Q.png'
-  )
+  const [projectAvatar, setProjectAvatar] = useState('https://i.imgur.com/3RzaW3Q.png')
   const [projectName, setProjectName] = useState('My DBC Project')
-  const [projectDescription, setProjectDescription] = useState(
-    'A cool Discord Bot created with DBC :)'
-  )
-  const [projectPath, setProjectPath] = useState('')
+  const [projectDescription, setProjectDescription] = useState('A cool Discord Bot created with DBC :)')
+  const [projectPath, setProjectPath] = useState(process.platform === 'win32' ? homedir() + '\\Desktop' : homedir())
 
   const history = useHistory()
 
   async function handleSearchPath () {
-    const pathResult = await dialog.showOpenDialog({
-      properties: ['openDirectory']
-    })
-    if (pathResult.canceled) return
-    setProjectPath(pathResult.filePaths[0])
+    const pathResult: OpenDialogReturnValue = await ipcRenderer.invoke('show-directory-dialog')
+    if (!pathResult.canceled) setProjectPath(pathResult.filePaths[0])
   }
 
   async function handleCreateProject (
@@ -42,32 +34,24 @@ export default function CreatingProjectPage () {
   ) {
     e.persist()
 
-    if (!projectPath) {
-      return Dialog.create(
-        'Hey!',
-        'You need to put a valid path to create your project.'
-      )
+    if (!projectAvatar || !projectName || !projectDescription || !projectPath) {
+      return Dialog.create('Hey!', 'You need to fill all the fields.')
     }
 
     const createProjectBtn = e.currentTarget
-    createProjectBtn.setAttribute('disabled', '')
-
     const loadingScreen = new LoadingScreen()
-    await loadingScreen.create('Creating Project...')
+
+    createProjectBtn.disabled = true
+    await loadingScreen.create('Checking if everything is ok... (0%)')
 
     try {
-      const projects = new Projects()
-      await projects.create(projectName || 'My DBC Project', projectPath)
-      const bot = new Bot(projectName || 'My DBC Project')
-      await bot.editConfig({
-        avatar: projectAvatar,
-        description: projectDescription
+      await Projects.create(projectAvatar, projectName, projectDescription, projectPath, (message: string) => {
+        loadingScreen.message = message
       })
-
       history.push('/project-panel')
       loadingScreen.close()
     } catch (err) {
-      createProjectBtn.removeAttribute('disabled')
+      createProjectBtn.disabled = false
       await loadingScreen.close()
 
       switch (err) {
@@ -89,7 +73,7 @@ export default function CreatingProjectPage () {
         case 'FAILED_TO_INSTALL_PROJECT_DEPENDENCIES':
           Dialog.create(
             'Hey!',
-            'Could not install project dependencies! Make sure your connection is ok.'
+            'Could not install project dependencies! Make sure if your internet connection is ok.'
           )
           break
         default:
@@ -105,12 +89,13 @@ export default function CreatingProjectPage () {
       </h1>
       <div id="field">
         <TextInput>
-          <label htmlFor="project-avatar">Avatar URL</label>
+          <label htmlFor="project-avatar">Avatar URL <span style={{ color: 'var(--red)' }}>*</span></label>
           <input
             id="project-avatar"
             type="text"
             defaultValue={projectAvatar}
             placeholder="Avatar of your project..."
+            required
             onChange={(e) => setProjectAvatar(e.target.value)}
           />
         </TextInput>
@@ -123,22 +108,24 @@ export default function CreatingProjectPage () {
         />
       </div>
       <TextInput id="field">
-        <label htmlFor="project-name">Name</label>
+        <label htmlFor="project-name">Name <span style={{ color: 'var(--red)' }}>*</span></label>
         <input
           id="project-name"
           type="text"
           defaultValue={projectName}
           placeholder="Name of your project..."
+          required
           onChange={(e) => setProjectName(e.target.value)}
         />
       </TextInput>
       <TextInput id="field">
-        <label htmlFor="project-description">Description</label>
+        <label htmlFor="project-description">Description <span style={{ color: 'var(--red)' }}>*</span></label>
         <input
           id="project-description"
           type="text"
           defaultValue={projectDescription}
           placeholder="Description of your project..."
+          required
           onChange={(e) => setProjectDescription(e.target.value)}
         />
       </TextInput>

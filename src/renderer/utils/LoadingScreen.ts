@@ -1,10 +1,5 @@
 import { readFileSync } from 'fs'
 
-const loaderSVG = readFileSync(
-  window.env.DBC_STATIC_PATH + '/media/img/loader.svg',
-  'utf-8'
-)
-
 export default class LoadingScreen {
   private _message: string
 
@@ -36,11 +31,15 @@ export default class LoadingScreen {
   create (message: string): Promise<void> {
     return new Promise((resolve) => {
       if (!document.getElementById('loading-screen')) {
+        const LoadingloaderSVG = readFileSync(
+          window.DBC.env.DBC_STATIC_PATH + '/media/img/loader.svg',
+          'utf-8'
+        )
         const loadingScreenElem = document.createElement('div')
         loadingScreenElem.id = 'loading-screen'
         loadingScreenElem.classList.add('fadeIn-500')
         loadingScreenElem.innerHTML = `
-          ${loaderSVG}
+          ${LoadingloaderSVG}
           <span>${message}</span>
         `
 

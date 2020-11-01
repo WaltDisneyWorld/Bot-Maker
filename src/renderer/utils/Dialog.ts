@@ -4,7 +4,7 @@ export default class Dialog {
       if (!document.getElementById('dialog')) {
         const dialogElem = document.createElement('div')
         dialogElem.id = 'dialog'
-        dialogElem.classList.add('fadeIn-500')
+        dialogElem.classList.add('fadeIn-200')
         dialogElem.innerHTML = `
           <div>
             <h2>${title}</h2>
@@ -22,11 +22,10 @@ export default class Dialog {
         document.content.style.userSelect = 'none'
         document.content.style.pointerEvents = 'none'
 
-        dialogElem.addEventListener('animationend', () => resolve())
         dialogElem
           .querySelector('button')
           .addEventListener('click', () => this.close())
-        window.addEventListener('keypress', ({ key }) => {
+        window.addEventListener('keydown', ({ key }) => {
           if (key === 'Enter') this.close()
         })
       }
@@ -37,13 +36,11 @@ export default class Dialog {
     return new Promise((resolve) => {
       if (document.getElementById('dialog')) {
         const dialogElem = document.getElementById('dialog')
-        dialogElem.addEventListener('animationend', () => {
-          dialogElem.remove()
-          document.content.style.opacity = ''
-          document.content.style.userSelect = ''
-          document.content.style.pointerEvents = ''
-          resolve()
-        })
+        dialogElem.remove()
+        document.content.style.opacity = ''
+        document.content.style.userSelect = ''
+        document.content.style.pointerEvents = ''
+        resolve()
       }
     })
   }

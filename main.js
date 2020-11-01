@@ -7,14 +7,16 @@
  * @license
  */
 
-const { app, BrowserWindow, ipcMain } = require('electron')
 const { existsSync } = require('fs')
+const Store = require('electron-store')
+const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron')
 const http = require('http')
 const handler = require('serve-handler')
 
 const DBCStaticPath = existsSync(__dirname + '/src')
   ? __dirname + '/static'
   : __dirname + '/build/static'
+const DBCStore = new Store()
 
 async function startDBC () {
   await app.whenReady()
@@ -30,9 +32,7 @@ async function startDBC () {
     height: 255,
     backgroundColor: '#282a36',
     webPreferences: {
-      nodeIntegration: true,
-      enableRemoteModule: true,
-      worldSafeExecuteJavaScript: true
+      nodeIntegration: true
     }
   })
   const mainWindow = new BrowserWindow({
@@ -47,13 +47,21 @@ async function startDBC () {
     minHeight: 550,
     backgroundColor: '#282a36',
     webPreferences: {
-      nodeIntegration: true,
-      enableRemoteModule: true,
-      worldSafeExecuteJavaScript: true
+      nodeIntegration: true
     }
   })
 
-  ipcMain.once('dbc-load', async () => {
+  loadWindow.loadFile(DBCStaticPath + '/html/load.html')
+  loadWindow.webContents.once('did-finish-load', () => loadWindow.show())
+
+  mainWindow.on('maximize', () =>
+    mainWindow.webContents.send('main-window-maximize')
+  )
+  mainWindow.on('unmaximize', () =>
+    mainWindow.webContents.send('main-window-unmaximize')
+  )
+
+  ipcMain.on('dbc-load', async () => {
     if (existsSync(__dirname + '/src')) {
       mainWindow.loadURL('http://localhost:3000')
     } else {
@@ -70,9 +78,33 @@ async function startDBC () {
       mainWindow.show()
     })
   })
-
-  loadWindow.loadFile(DBCStaticPath + '/html/load.html')
-  loadWindow.webContents.once('did-finish-load', () => loadWindow.show())
+  ipcMain.handle('get-app-path', () => {
+    return app.getAppPath()
+  })
+  ipcMain.on('load-window-close', () => loadWindow.close())
+  ipcMain.on('main-window-minimize', () => mainWindow.minimize())
+  ipcMain.on('main-window-maximize', () => mainWindow.maximize())
+  ipcMain.on('main-window-unmaximize', () => mainWindow.unmaximize())
+  ipcMain.on('main-window-close', () => mainWindow.close())
+  ipcMain.handle('main-window-is-maximized', () => {
+    return mainWindow.isMaximized()
+  })
+  ipcMain.handle('main-window-is-focused', () => {
+    return mainWindow.isFocused()
+  })
+  ipcMain.handle('show-directory-dialog', async () => { 
+    return await dialog.showOpenDialog({
+      properties: ['openDirectory']
+    }) 
+  })
+  ipcMain.handle(
+    'show-notification',
+    (event, options) => new Notification(options).show() 
+  )
+  ipcMain.handle('store-get', (event, key) => {
+    return DBCStore.get(key)
+  })
+  ipcMain.on('store-set', (event, key, value) => DBCStore.set(key, value))
 }
 
 startDBC()

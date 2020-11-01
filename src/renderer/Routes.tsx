@@ -11,25 +11,7 @@ export default function Routes () {
       <Switch>
         <Route path="/" exact component={Index} />
         <Route path="/creating-project" component={CreatingProject} />
-        <Route
-          path="/project-panel"
-          render={({ match: { url } }) => (
-            <>
-              <Route path={url + '/'} exact>
-                <ProjectPanel />
-              </Route>
-              <Route path={url + '/commands'}>
-                <ProjectPanel section="commands" />
-              </Route>
-              <Route path={url + '/events'}>
-                <ProjectPanel section="events" />
-              </Route>
-              <Route path={url + '/config'}>
-                <ProjectPanel section="config" />
-              </Route>
-            </>
-          )}
-        />
+        <Route path="/project-panel/:section" exact component={ProjectPanel} />
       </Switch>
     </Router>
   )

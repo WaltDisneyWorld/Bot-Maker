@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+
+import ProjectPanelSections from '../../../types/ProjectPanelSections'
 
 import ProjectPanelContainer from './components/ProjectPanelContainer'
 import ProjectPanelMenu from './components/ProjectPanelMenu'
@@ -6,23 +9,16 @@ import ProjectPanelCommands from './components/ProjectPanelCommands'
 import ProjectPanelEvents from './components/ProjectPanelEvents'
 import ProjectPanelConfig from './components/ProjectPanelConfig'
 
-import ProjectPanelSections from '../../../types/ProjectPanelSections'
+export default function ProjectPanel () {
+  const { section } = useParams<{ section: ProjectPanelSections }>()
 
-import { Projects, Bot } from '../../controllers'
-
-export default function ProjectPanel (props: {
-  section?: ProjectPanelSections
-}) {
-  const { section } = props
-
-  const project = new Projects().working
-  const bot = new Bot(project.name)
-
-  document.setTitle(project.name + ' - Discord Bot Creator')
+  useEffect(() => {
+    console.log('a')
+  })
 
   return (
     <ProjectPanelContainer>
-      <ProjectPanelMenu project={project} bot={bot} section={section} />
+      <ProjectPanelMenu section={section} />
       <div>
         {section === 'commands' ? (
           <ProjectPanelCommands />
@@ -30,9 +26,9 @@ export default function ProjectPanel (props: {
           <ProjectPanelEvents />
         ) : section === 'config' ? (
           <ProjectPanelConfig />
-        ) : (
+        ) : section === 'welcome' ? (
           <h1>Hello 0</h1>
-        )}
+        ) : ''}
       </div>
     </ProjectPanelContainer>
   )

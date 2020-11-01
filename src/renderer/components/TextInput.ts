@@ -19,15 +19,13 @@ const TextInput = styled.div`
     color: var(--textInputColor);
     border: 2px solid var(--textInputBorderColor);
     border-radius: 3px;
-    transition: background-color 200ms, color 200ms, border-color 200ms,
-      box-shadow 200ms;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   }
 
   input[type='text']:focus {
     background-color: var(--textInputBgFocus);
     color: var(--textInputColorFocus);
     border-color: var(--textInputBorderColorFocus);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 `
 

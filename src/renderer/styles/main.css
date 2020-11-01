@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: var(--main);
+}
+
 body {
   overflow: hidden;
   font-family: Inter, sans-serif;
@@ -17,9 +21,6 @@ body {
   color: #fff;
 }
 
-::selection {
-  background-color: var(--main);
-}
 
 button {
   cursor: pointer;
@@ -36,4 +37,8 @@ a:hover {
 
 svg {
   fill: var(--svgColor);
+}
+
+#content {
+  transition: opacity 200ms;
 }

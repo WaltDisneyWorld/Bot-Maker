@@ -1,3 +1,3 @@
-type ProjectPanelSections = 'commands' | 'events' | 'config' | undefined
+type ProjectPanelSections = 'welcome' | 'commands' | 'events' | 'config'
 
 export default ProjectPanelSections

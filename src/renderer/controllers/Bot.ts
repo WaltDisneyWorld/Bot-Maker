@@ -1,41 +1,40 @@
-import { readFileSync, writeFileSync } from 'fs'
-
-import { Projects } from './'
+import { readJSON, readFileSync, writeFileSync } from 'fs-extra'
 
 import DBCProject from '../../interfaces/DBCProject'
 import DBCBotStorage from '../../interfaces/DBCBotStorage'
 import DBCBotConfig from '../../interfaces/DBCBotConfig'
 
+import { Projects } from './'
+
 export default class Bot {
-  private _project: DBCProject
+  projectName: string
 
   constructor (projectName: string) {
-    this._project = new Projects().projects.find((p) => p.name === projectName)
+    this.projectName = projectName
   }
 
-  get project () {
-    return this._project
+  async getProject (): Promise<DBCProject> {
+    return (await Projects.get()).find(async (p) => p.name === this.projectName)
   }
 
-  get storage (): DBCBotStorage {
-    return JSON.parse(
-      readFileSync(this.project.path + '/storage.json', 'utf-8')
-    )
+  async getStorage (): Promise<DBCBotStorage> {
+    return await readJSON((await this.getProject()).path + '/storage.json')
   }
 
   editConfig (options: DBCBotConfig): Promise<void> {
-    return new Promise((resolve) => {
-      this.storage.config.avatar = options.avatar || this.storage.config.avatar
-      this.storage.config.description =
-        options.description || this.storage.config.description
-      this.storage.config.owners = options.owners || this.storage.config.owners
-      this.storage.config.token = options.token || this.storage.config.token
-      this.storage.config.prefix = options.prefix || this.storage.config.prefix
-      this.storage.config.caseSensitive =
-        options.caseSensitive || this.storage.config.caseSensitive
+    return new Promise(async (resolve) => {
+      const storage = await this.getStorage()
+      storage.config.avatar = options.avatar || storage.config.avatar
+      storage.config.description =
+        options.description || storage.config.description
+      storage.config.owners = options.owners || storage.config.owners
+      storage.config.token = options.token || storage.config.token
+      storage.config.prefix = options.prefix || storage.config.prefix
+      storage.config.caseSensitive =
+        options.caseSensitive || storage.config.caseSensitive
       writeFileSync(
-        this.project.path + '/storage.json',
-        JSON.stringify(this.storage, null, 2)
+        (await this.getProject()).path + '/storage.json',
+        JSON.stringify(storage, null, 2)
       )
       resolve()
     })

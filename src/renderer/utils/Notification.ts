@@ -1,15 +1,7 @@
-import { remote } from 'electron'
+import { ipcRenderer } from 'electron'
 import { readFileSync } from 'fs'
 
 import DBCNotification from '../../interfaces/DBCNotification'
-
-const ElectronNotification = remote.Notification
-
-const closeSVG = readFileSync(
-  window.env.DBC_APP_PATH +
-    '/node_modules/@discord-bot-creator/icons/close.svg',
-  'utf-8'
-)
 
 export default class Notification {
   static create (
@@ -17,19 +9,22 @@ export default class Notification {
     message: string,
     timeout?: number
   ): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       if (!document.getElementById('notification')) {
-        const notifications =
-          window.store.get<any, Array<DBCNotification>>('notifications') || []
-
+        const notifications: Array<DBCNotification> =
+          await window.DBC.store.get('notifications') || []
         notifications.push({
           type,
           message
         })
+        window.DBC.store.set('notifications', notifications)
 
-        window.store.set('notifications', notifications)
-
-        if (window.mainWindow.isFocused()) {
+        if (await ipcRenderer.invoke('main-window-is-focused')) {
+          const notificationCloseSVG = readFileSync(
+            window.DBC.env.DBC_APP_PATH +
+              '/node_modules/@discord-bot-creator/icons/close.svg',
+            'utf-8'
+          )
           const notificationElem = document.createElement('div')
           notificationElem.id = 'notification'
           notificationElem.classList.add('fadeInRight-500')
@@ -45,17 +40,13 @@ export default class Notification {
               : ''
           notificationElem.innerHTML = `
             <span>${message}</span>
-            <div>${closeSVG}</div>
+            <div>${notificationCloseSVG}</div>
           `
 
           const notificationSoundElem = document.createElement('audio')
           notificationSoundElem.src = '/static/media/audios/notification.mp3'
           notificationSoundElem.autoplay = true
 
-          document.body.appendChild(notificationSoundElem)
-          document.overlays.appendChild(notificationElem)
-
-          notificationElem.addEventListener('animationend', () => resolve())
           notificationElem
             .querySelector('div')
             .addEventListener('click', () => this.close())
@@ -63,13 +54,19 @@ export default class Notification {
             notificationSoundElem.remove()
           )
 
+          document.body.appendChild(notificationSoundElem)
+          document.overlays.appendChild(notificationElem)
+
           if (timeout) setTimeout(() => this.close(), timeout)
+
+          resolve()
         } else {
-          new ElectronNotification({
-            icon: window.env.DBC_STATIC_PATH + '/media/img/logo.png',
+          await ipcRenderer.invoke('show-notification', {
+            icon: window.DBC.env.DBC_STATIC_PATH + '/media/img/logo.png',
             title: 'Discord Bot Creator',
             body: message
-          }).show()
+          })
+          resolve()
         }
       }
     })

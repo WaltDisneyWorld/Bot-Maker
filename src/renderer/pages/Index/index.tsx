@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { ReactComponent as PlusSVG } from '@discord-bot-creator/icons/plus.svg'
 import { ReactComponent as FolderSVG } from '@discord-bot-creator/icons/folder.svg'
 
+import { Projects } from '../../controllers'
+
 import IndexContainer from './components/IndexContainer'
 import Button from '../../components/Button'
-
-import { Projects } from '../../controllers'
 
 import logo from '../../assets/img/logo.png'
 
@@ -15,17 +15,21 @@ export default function IndexPage () {
 
   const history = useHistory()
 
-  const projects = new Projects()
-  if (projects.working) {
-    history.push('/project-panel')
-  }
+  useEffect(() => {
+    async function checkIfHaveWorkingProject () {
+      if (await Projects.getWorking()) {
+        history.push('/project-panel')
+      }
+    }
+    checkIfHaveWorkingProject()
+  })
 
   return (
     <IndexContainer>
       <img src={logo} alt="DBC Logo" />
       <div>
         <h1>
-          Discord Bot Creator <span>v{window.env.DBC_VERSION}</span>
+          Discord Bot Creator <span></span>
         </h1>
         <div>
           <Button purple onClick={() => history.push('/creating-project')}>

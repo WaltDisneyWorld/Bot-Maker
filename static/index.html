@@ -9,11 +9,19 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Discord Bot Creator</title>
-    <link rel="stylesheet" href="/static/media/fonts/inter/inter.css" />
-    <link rel="stylesheet" href="/static/media/fonts/fira-code/fira-code.css" />
+    <link rel="stylesheet" href="/media/fonts/inter/inter.css" />
+    <link rel="stylesheet" href="/media/fonts/fira-code/fira-code.css" />
   </head>
   <body>
     <div id="overlays"></div>
     <div id="content"></div>
+    <script>
+      if (require('fs').existsSync(__dirname + '/static')) {
+        const linkInterFontElem = document.querySelectorAll('link[rel="stylesheet"]')[0]
+        linkInterFontElem.href = '/static' + linkInterFontElem.href
+        const linkFiraCodeFontElem = document.querySelectorAll('link[rel="stylesheet"]')[1]
+        linkFiraCodeFontElem.href = '/static' + linkFiraCodeFontElem.href
+      }
+    </script>
   </body>
 </html>

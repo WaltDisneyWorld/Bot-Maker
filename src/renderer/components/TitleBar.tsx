@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { ipcRenderer } from 'electron'
 import styled from 'styled-components'
 import { ReactComponent as BellSVG } from '@discord-bot-creator/icons/bell.svg'
 import { ReactComponent as CogSVG } from '@discord-bot-creator/icons/cog.svg'
@@ -158,21 +159,19 @@ const TitleBarContainer = styled.div`
 `
 
 export default function TitleBar () {
-  const [winIsMaximized, setWinIsMaximized] = useState(
-    window.mainWindow.isMaximized()
-  )
+  const [winIsMaximized, setWinIsMaximized] = useState(false)
 
-  function handleMaxUnWindow () {
-    if (window.mainWindow.isMaximized()) {
-      window.mainWindow.unmaximize()
+  async function handleMaxUnWindow () {
+    if (await ipcRenderer.invoke('main-window-is-maximized')) {
+      ipcRenderer.send('main-window-unmaximize')
     } else {
-      window.mainWindow.maximize()
+      ipcRenderer.send('main-window-maximize')
     }
   }
 
   useEffect(() => {
-    window.mainWindow.on('maximize', () => setWinIsMaximized(true))
-    window.mainWindow.on('unmaximize', () => setWinIsMaximized(false))
+    ipcRenderer.on('main-window-maximize', () => setWinIsMaximized(true))
+    ipcRenderer.on('main-window-unmaximize', () => setWinIsMaximized(false))
   })
 
   return (
@@ -181,8 +180,8 @@ export default function TitleBar () {
       <div></div>
       <div></div>
       <div>
-        <div onClick={() => window.mainWindow.close()}></div>
-        <div onClick={() => window.mainWindow.minimize()}></div>
+        <div onClick={() => ipcRenderer.send('main-window-close')}></div>
+        <div onClick={() => ipcRenderer.send('main-window-minimize')}></div>
         <div onClick={handleMaxUnWindow}></div>
       </div>
       <img src={logo} alt="DBC Logo" />
@@ -196,13 +195,13 @@ export default function TitleBar () {
         </div>
       </div>
       <div>
-        <div onClick={() => window.mainWindow.minimize()}>
+        <div onClick={() => ipcRenderer.send('main-window-minimize')}>
           <MinimizeSVG />
         </div>
         <div onClick={handleMaxUnWindow}>
           {winIsMaximized ? <UnmaximizeSVG /> : <MaximizeSVG />}
         </div>
-        <div onClick={() => window.mainWindow.close()}>
+        <div onClick={() => ipcRenderer.send('main-window-close')}>
           <CloseSVG />
         </div>
       </div>
