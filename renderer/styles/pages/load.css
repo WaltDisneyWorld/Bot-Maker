@@ -1,0 +1,38 @@
+/*! Copyright (c) Discord Bot Creator. */
+
+body {
+  -webkit-app-region: drag;
+}
+
+div:first-child {
+  width: 100%;
+}
+
+#loader {
+  height: 7px;
+  background-color: #bd93f9;
+}
+
+#loader div {
+  width: 50px;
+  height: 7px;
+  background-color: #ffffff;
+  animation: 800ms loaderBarMove infinite;
+}
+
+img {
+  width: 215px;
+  height: 215px;
+}
+
+p {
+  font-weight: bold;
+  font-size: 15px;
+  color: #b8b8b8;
+}
+
+@keyframes loaderBarMove {
+  50% {
+    transform: translateX(200px);
+  }
+}

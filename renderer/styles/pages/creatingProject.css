@@ -1,0 +1,61 @@
+/*! Copyright (c) Discord Bot Creator. */
+
+form {
+  width: 85%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 100%;
+}
+
+form .text-input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+form div:nth-child(5) {
+  width: 100%;
+}
+
+form div:nth-child(5) .text-input {
+  width: 320%;
+}
+
+form div:nth-child(5) button {
+  height: 40px;
+  margin-top: 23px;
+  margin-left: 10px;
+}
+
+form button {
+  width: 100%;
+  margin-top: 3px;
+  padding: 15px;
+}
+
+#loading-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loading-screen svg {
+  width: 80px;
+  height: 80px;
+}
+
+#loading-screen p {
+  margin-top: 20px;
+  font-size: 14px;
+}

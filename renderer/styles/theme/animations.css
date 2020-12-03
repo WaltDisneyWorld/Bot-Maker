@@ -1,0 +1,81 @@
+.fadeIn-200 {
+  animation: fadeIn 200ms backwards;
+}
+
+.fadeOut-200 {
+  animation: fadeOut 200ms forwards;
+}
+
+.fadeInRight-200 {
+  animation: fadeInRight 200ms backwards;
+}
+
+.fadeOutRight-200 {
+  animation: fadeOutRight 200ms backwards;
+}
+
+.fadeInBottom-200 {
+  animation: fadeInBottom 200ms backwards;
+}
+
+.fadeOutBottom-200 {
+  animation: fadeOutBottom 200ms forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutBottom {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+}

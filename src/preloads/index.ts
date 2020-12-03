@@ -1,2 +1,0 @@
-import './window'
-import './document'

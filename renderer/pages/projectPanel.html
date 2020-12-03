@@ -1,0 +1,258 @@
+<!--! Copyright (c) Discord Bot Creator. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discord Bot Creator | Project Panel</title>
+    <link rel="stylesheet" href="../styles/theme/theme.css" />
+    <link rel="stylesheet" href="../styles/pages/projectPanel.css" />
+  </head>
+  <body>
+    <div class="row">
+      <menu>
+        <div class="row">
+          <img name="project-avatar" src="https://i.imgur.com/3RzaW3Q.png" alt="Project Avatar" />
+          <div name="project-control" style="display: none;">
+            <button color="green">1</button>
+            <button color="pink">2</button>
+            <button color="white">3</button>
+            <button>4</button>
+            <button color="red">5</button>
+          </div>
+        </div>
+        <div class="column text-align-center">
+          <div
+            style="background-color: var(--projectPanelSectionsMenuActiveBg)"
+            title="Commands"
+            icon="list"
+          ></div>
+          <div title="Events" icon="schedule"></div>
+          <div title="Configuration" icon="cogs"></div>
+        </div>
+      </menu>
+      <div id="sections">
+        <div>
+          <h1>Hello 1</h1>
+        </div>
+        <div style="display: none">
+          <h1>Hello 2</h1>
+        </div>
+        <div style="display: none">
+          <h1 icon="cog">Configuration</h1>
+          <div class="column">
+            <div id="config-main">
+              <div class="text-input">
+                <label for="project-avatar"
+                  >Avatar URL <span style="color: var(--red)">*</span></label
+                >
+                <input type="text" id="project-avatar" />
+                <span></span>
+              </div>
+              <div class="text-input">
+                <label for="project-description"
+                  >Description <span style="color: var(--red)">*</span></label
+                >
+                <input type="text" id="project-description" />
+                <span></span>
+              </div>
+              <div class="text-input">
+                <label for="project-bot-owners">Owners IDs</label>
+                <input
+                  type="text"
+                  id="project-bot-owners"
+                  placeholder="Separate with commas if there are two or more owners."
+                />
+              </div>
+              <div class="row">
+                <div class="text-input">
+                  <label for="project-bot-token"
+                    >Token <span style="color: var(--red)">*</span></label
+                  >
+                  <input type="password" id="project-bot-token" />
+                  <span></span>
+                </div>
+                <div class="text-input">
+                  <label for="project-bot-prefix"
+                    >Prefix <span style="color: var(--red)">*</span></label
+                  >
+                  <input type="text" id="project-bot-prefix" />
+                  <span></span>
+                </div>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="project-bot-case-sensitive" />
+                <label for="project-bot-case-sensitive"
+                  >Use Case Sensitive</label
+                >
+              </div>
+            </div>
+            <div id="config-intents" class="column">
+              <h4>Intents</h4>
+              <div>
+                <div class="row">
+                  <div
+                    class="checkbox"
+                    title="This intent is essential to the bot work, so you can't deselect it."
+                  >
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guilds"
+                      disabled
+                    />
+                    <label for="project-bot-intents-guilds">Guilds</label>
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-members"
+                    />
+                    <label for="project-bot-intents-guild-members"
+                      >Guild Members</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-bans"
+                    />
+                    <label for="project-bot-intents-guild-bans"
+                      >Guild Bans</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-emojis"
+                    />
+                    <label for="project-bot-intents-guild-emojis"
+                      >Guild Emojis</label
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-integrations"
+                    />
+                    <label for="project-bot-intents-guild-integrations"
+                      >Guild Integrations</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-webhooks"
+                    />
+                    <label for="project-bot-intents-guild-webhooks"
+                      >Guild Webhooks</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-invites"
+                    />
+                    <label for="project-bot-intents-guild-invites"
+                      >Guild Invites</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-voice-states"
+                    />
+                    <label for="project-bot-intents-guild-voice-states"
+                      >Guild Voice States</label
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-presences"
+                    />
+                    <label for="project-bot-intents-guild-presences"
+                      >Guild Presences</label
+                    >
+                  </div>
+                  <div
+                    class="checkbox"
+                    title="This intent is essential to the bot work, so you can't deselect it."
+                  >
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-messages"
+                      disabled
+                    />
+                    <label for="project-bot-intents-guild-messages"
+                      >Guild Messages</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-message-reactions"
+                    />
+                    <label for="project-bot-intents-guild-message-reactions"
+                      >Guild Message Reactions</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-guild-message-typing"
+                    />
+                    <label for="project-bot-intents-guild-message-typing"
+                      >Guild Message Typing</label
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-direct-messages"
+                    />
+                    <label for="project-bot-intents-direct-messages"
+                      >Direct Messages</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-direct-message-reactions"
+                    />
+                    <label for="project-bot-intents-direct-message-reactions"
+                      >Direct Message Reactions</label
+                    >
+                  </div>
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="project-bot-intents-direct-message-typing"
+                    />
+                    <label for="project-bot-intents-direct-message-typing"
+                      >Direct Message Typing</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../scripts/global.js" type="module"></script>
+    <script
+      src="../scripts/pages/projectPanel/projectPanel.js"
+      type="module"
+    ></script>
+  </body>
+</html>

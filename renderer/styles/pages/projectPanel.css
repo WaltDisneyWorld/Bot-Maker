@@ -1,0 +1,115 @@
+/*! Copyright (c) Discord Bot Creator. */
+
+menu {
+  z-index: 100;
+  position: fixed;
+  width: 60px;
+  height: 100%;
+  background-color: var(--projectPanelMenuBg);
+}
+
+menu > div:nth-child(1) {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 5px solid var(--mainColor);
+  background-color: var(--projectPanelMenuProjectInfoOfflineBg);
+  transition: background-color 200ms;
+}
+
+menu > div:nth-child(1) img {
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  border: 2px solid var(--projectPanelMenuProjectAvatarBorderColor);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+menu > div:nth-child(1) img:hover {
+  border-width: 3px;
+}
+
+menu > div:nth-child(1) div {
+  z-index: -1;
+  height: 70px;
+  padding: 13px;
+  padding-left: 8px;
+  position: absolute;
+  top: 0;
+  left: 60px;
+  border-radius: 0 0 5px 0;
+  border-bottom: 5px solid var(--mainColor);
+  background-color: var(--projectPanelMenuProjectInfoOfflineBg);
+}
+
+menu > div:nth-child(1) div button {
+  margin-right: 5px;
+  width: 40px;
+  border-radius: 100%;
+}
+
+menu > div:nth-child(1) div button:last-child {
+  margin-right: 0;
+}
+
+menu > div:nth-child(2) div {
+  cursor: pointer;
+  padding: 15px;
+}
+
+menu > div:nth-child(2) div:hover {
+  background-color: var(--projectPanelSectionsMenuHoverBg);
+}
+
+menu > div:nth-child(2) div svg {
+  width: 15px;
+  height: 15px;
+}
+
+#sections {
+  width: 100%;
+  margin-top: 30px;
+  margin-left: 90px;
+  margin-right: 30px;
+  margin-bottom: 40px;
+}
+
+#sections div:nth-child(3) h1 {
+  margin-bottom: 30px;
+}
+
+#sections div:nth-child(3) h1 svg {
+  width: 25px;
+  height: 25px;
+}
+
+#config-main .text-input {
+  margin-bottom: 10px;
+}
+
+#config-main div div:nth-child(1) {
+  margin-right: 10px;
+}
+
+#config-intents {
+  margin-top: 25px;
+}
+
+#config-intents h4 {
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+#config-intents > div {
+  width: fit-content;
+  padding: 13px;
+  border-radius: 3px;
+  background-color: var(--projectPanelConfigIntentsBg);
+  border: 2px solid var(--projectPanelConfigIntentsBorderColor);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#config-intents div div div {
+  margin-right: 10px;
+}

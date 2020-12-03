@@ -1,0 +1,64 @@
+<!--! Copyright (c) Discord Bot Creator. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discord Bot Creator | Creating Project</title>
+    <link rel="stylesheet" href="../styles/theme/theme.css" />
+    <link rel="stylesheet" href="../styles/pages/creatingProject.css" />
+  </head>
+  <body>
+    <form class="column align-items-center">
+      <img src="https://i.imgur.com/3RzaW3Q.png" alt="Project Avatar" />
+      <div class="text-input">
+        <label for="project-avatar"
+          >Avatar URL <span style="color: var(--red)">*</span></label
+        >
+        <input
+          type="text"
+          id="project-avatar"
+          value="https://i.imgur.com/3RzaW3Q.png"
+        />
+        <span></span>
+      </div>
+      <div class="text-input">
+        <label for="project-name"
+          >Name <span style="color: var(--red)">*</span></label
+        >
+        <input type="text" id="project-name" value="My DBC Project" required />
+        <span></span>
+      </div>
+      <div class="text-input">
+        <label for="project-description"
+          >Description <span style="color: var(--red)">*</span></label
+        >
+        <input
+          type="text"
+          id="project-description"
+          value="A cool Discord Bot created with DBC :)"
+        />
+        <span></span>
+      </div>
+      <div class="row">
+        <div class="text-input">
+          <label for="project-path"
+            >Path <span style="color: var(--red)">*</span></label
+          >
+          <input type="text" id="project-path" required />
+          <span></span>
+        </div>
+        <button type="button" variant="outlined" color="white" icon="search">
+          Search
+        </button>
+      </div>
+      <button type="submit" color="green" icon="plus">Create Project</button>
+    </form>
+    <script src="../scripts/global.js" type="module"></script>
+    <script src="../scripts/pages/creatingProject.js" type="module"></script>
+  </body>
+</html>

@@ -1,2 +1,0 @@
-import './preloads'
-import './renderer'

@@ -1,22 +1,18 @@
 {
-  "appId": "org.discord-bot-creator.DiscordBotCreator",
+  "appId": "org.discord-bot-creator.discord-bot-creator",
   "productName": "Discord Bot Creator",
   "copyright": "Copyright © 2020 Discord Bot Creator",
-  "files": [
-    "./main.js",
-    "./LICENSE",
-    "./build/**/*"
-  ],
+  "files": ["./main.js", "./LICENSE", "./renderer", "./resources"],
   "directories": {
-    "buildResources": "./build"
+    "buildResources": "./build/resources"
   },
-  "extends": null,
   "win": {
-    "icon": "static/media/img/logo.ico",
-    "target": [
-      "zip",
-      "nsis"
-    ]
+    "icon": "icon.ico",
+    "target": ["zip"]
+  },
+  "linux": {
+    "icon": "icon.png",
+    "target": ["deb"]
   },
   "nsis": {
     "license": "./LICENSE",

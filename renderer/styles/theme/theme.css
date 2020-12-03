@@ -1,0 +1,496 @@
+/*! Copyright (c) Discord Bot Creator. */
+
+@import '../../assets/fonts/inter/inter.css';
+@import '../../assets/fonts/fira-code/fira-code.css';
+
+@import './animations.css';
+
+:root {
+  --purple: #bd93f9;
+  --red: #ff5555;
+  --green: #50fa7b;
+  --yellow: #f1fa8c;
+  --orange: #ffb86c;
+  --pink: #ff79c6;
+  --cyan: #8be9fd;
+  --blue: #6272a4;
+
+  --background: #282a36;
+  --color: #fff;
+  --mainColor: var(--purple);
+
+  --svgColor: #fff;
+
+  --buttonPurple: var(--purple);
+  --buttonPurpleActive: #ab73ff;
+  --buttonWhite: #fff;
+  --buttonWhiteActive: #d1d1d1;
+  --buttonRed: var(--red);
+  --buttonRedActive: #eb4e4e;
+  --buttonGreen: var(--green);
+  --buttonGreenActive: #3bb75c;
+  --buttonYellow: var(--yellow);
+  --buttonYellowActive: #d8e081;
+  --buttonOrange: var(--orange);
+  --buttonOrangeActive: #dda160;
+  --buttonPink: var(--pink);
+  --buttonPinkActive: #be5a94;
+  --buttonCyan: var(--cyan);
+  --buttonCyanActive: #65adbd;
+  --buttonContentColor: #000;
+  --buttonContentColorHover: #000;
+  --buttonContentColorActive: #fff;
+  --buttonWhiteContentColor: #000;
+  --buttonWhiteContentColorHover: #000;
+  --buttonWhiteContentColorActive: #000;
+  --buttonYellowContentColor: #000;
+  --buttonYellowContentColorHover: #000;
+  --buttonYellowContentColorActive: #000;
+
+  --textInputLabelColor: #dadada;
+  --textInputBg: #22222c;
+  --textInputColor: #a7a7a7;
+  --textInputBorderColor: var(--purple);
+  --textInputBgFocus: #1c1c23;
+  --textInputColorFocus: #fff;
+  --textInputBorderColorFocus: var(--pink);
+
+  --checkboxLabelColor: #dadada;
+
+  --notificationBg: #21222c;
+  --notificationCloseBg: #44475a;
+  --notificationInfoColor: var(--cyan);
+  --notificationSuccessColor: var(--green);
+  --notificationErrorColor: var(--red);
+  --notificationAlertColor: var(--yellow);
+
+  --projectPanelMenuBg: #21222c;
+  --projectPanelMenuProjectInfoOfflineBg: var(--blue);
+  --projectPanelMenuProjectInfoOnlineBg: #4ab666;
+  --projectPanelMenuProjectInfoErrorBg: var(--red);
+  --projectPanelMenuProjectAvatarBorderColor: #fff;
+  --projectPanelMenuProjectControlBg: #21222c;
+  --projectPanelSectionsMenuHoverBg: #44475a;
+  --projectPanelSectionsMenuActiveBg: #343546;
+
+  --projectPanelConfigIntentsBg: #21222c;
+  --projectPanelConfigIntentsBorderColor: var(--purple);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+}
+
+::selection {
+  background-color: var(--mainColor);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #21222c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mainColor);
+  border-radius: 3px 0 0 3px;
+}
+
+body {
+  height: 100%;
+  font-family: Inter, sans-serif;
+  background-color: var(--background);
+  color: var(--color);
+}
+
+a {
+  color: var(--mainColor);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+svg {
+  fill: var(--svgColor);
+}
+
+button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: var(--buttonPurple);
+  color: var(--buttonContentColor);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 100ms, color 100ms;
+}
+
+button:active {
+  background-color: var(--buttonPurpleActive);
+  color: var(--buttonContentColorActive);
+}
+
+button:active svg {
+  fill: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'] {
+  padding: 9.5px 18px;
+  background: transparent !important;
+  color: var(--buttonPurple);
+  border: 1px solid var(--buttonPurple);
+}
+
+button[variant='outlined']:hover {
+  background-color: var(--buttonPurple) !important;
+  color: var(--buttonContentColorHover);
+}
+
+button[variant='outlined']:active {
+  background-color: var(--buttonPurpleActive) !important;
+  color: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'] svg {
+  fill: var(--buttonPurple);
+}
+
+button[variant='outlined']:hover svg {
+  fill: var(--buttonContentColorHover) !important;
+}
+
+button[variant='outlined']:active svg {
+  fill: var(--buttonContentColorActive) !important;
+}
+
+button[color='white'] {
+  background-color: var(--buttonWhite);
+  color: var(--buttonWhiteContentColor);
+}
+
+button[color='white']:active {
+  background-color: var(--buttonWhiteActive);
+  color: var(--buttonWhiteContentColorActive);
+}
+
+button[color='red'] {
+  background-color: var(--buttonRed);
+}
+
+button[color='red']:active {
+  background-color: var(--buttonRedActive);
+}
+
+button[color='green'] {
+  background-color: var(--buttonGreen);
+}
+
+button[color='green']:active {
+  background-color: var(--buttonGreenActive);
+}
+
+button[color='yellow'] {
+  background-color: var(--buttonYellow);
+}
+
+button[color='yellow']:active {
+  background-color: var(--buttonYellowActive);
+  color: var(--buttonYellowContentColorActive);
+}
+
+button[color='orange'] {
+  background-color: var(--buttonOrange);
+}
+
+button[color='orange']:active {
+  background-color: var(--buttonOrangeActive);
+}
+
+button[color='pink'] {
+  background-color: var(--buttonPink);
+}
+
+button[color='pink']:active {
+  background-color: var(--buttonPinkActive);
+}
+
+button[color='cyan'] {
+  background-color: var(--buttonCyan);
+}
+
+button[color='cyan']:active {
+  background-color: var(--buttonCyanActive);
+}
+
+button[color='blue'] {
+  background-color: var(--buttonBlue);
+}
+
+button[color='blue']:active {
+  background-color: var(--buttonBlueActive);
+}
+
+button[variant='outlined'][color='white'] {
+  color: var(--buttonWhite);
+  border-color: var(--buttonWhite);
+}
+
+button[variant='outlined'][color='white']:hover {
+  background-color: var(--buttonWhite) !important;
+  color: var(--buttonWhiteContentColorHover);
+}
+
+button[variant='outlined'][color='white']:active {
+  background-color: var(--buttonWhiteActive) !important;
+  color: var(--buttonWhiteContentColorActive);
+}
+
+button[variant='outlined'][color='white'] svg {
+  fill: var(--buttonWhite);
+}
+
+button[variant='outlined'][color='white']:hover svg {
+  fill: var(--buttonWhiteContentColorActive) !important;
+}
+
+button[variant='outlined'][color='red'] {
+  color: var(--buttonRed);
+  border: 1px solid var(--buttonRed);
+}
+
+button[variant='outlined'][color='red']:hover {
+  background-color: var(--buttonRed) !important;
+  color: var(--buttonContentColor);
+}
+
+button[variant='outlined'][color='red']:active {
+  background-color: var(--buttonRedActive) !important;
+  color: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'][color='red'] svg {
+  fill: var(--buttonRed);
+}
+
+button[variant='outlined'][color='green'] {
+  color: var(--buttonGreen);
+  border-color: var(--buttonGreen);
+}
+
+button[variant='outlined'][color='green']:hover {
+  background-color: var(--buttonGreen) !important;
+  color: var(--buttonContentColor);
+}
+
+button[variant='outlined'][color='green']:active {
+  background-color: var(--buttonGreenActive) !important;
+  color: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'][color='green'] svg {
+  fill: var(--buttonGreen);
+}
+
+button[variant='outlined'][color='yellow'] {
+  color: var(--buttonYellow);
+  border-color: var(--buttonYellow);
+}
+
+button[variant='outlined'][color='yellow']:hover {
+  background-color: var(--buttonYellow) !important;
+  color: var(--buttonYellowContentColorHover);
+}
+
+button[variant='outlined'][color='yellow']:active {
+  background-color: var(--buttonYellowActive) !important;
+  color: var(--buttonYellowContentColorActive);
+}
+
+button[variant='outlined'][color='yellow'] svg {
+  fill: var(--buttonYellow);
+}
+
+button[variant='outlined'][color='orange'] {
+  color: var(--buttonOrange);
+  border-color: var(--buttonOrange);
+}
+
+button[variant='outlined'][color='orange']:hover {
+  background-color: var(--buttonOrange) !important;
+  color: var(--buttonContentColorHover);
+}
+
+button[variant='outlined'][color='orange']:active {
+  background-color: var(--buttonOrangeActive) !important;
+  color: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'][color='orange'] svg {
+  fill: var(--buttonOrange);
+}
+
+button[variant='outlined'][color='pink'] {
+  color: var(--buttonPink);
+  border-color: var(--buttonPink);
+}
+
+button[variant='outlined'][color='pink']:hover {
+  background-color: var(--buttonPink) !important;
+  color: var(--buttonContentColorHover);
+}
+
+button[variant='outlined'][color='pink']:active {
+  background-color: var(--buttonPinkActive) !important;
+  color: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'][color='pink'] svg {
+  fill: var(--buttonPink);
+}
+
+button[variant='outlined'][color='cyan'] {
+  color: var(--buttonCyan);
+  border-color: var(--buttonCyan);
+}
+
+button[variant='outlined'][color='cyan']:hover {
+  background-color: var(--buttonCyan) !important;
+  color: var(--buttonContentColorHover);
+}
+
+button[variant='outlined'][color='cyan']:active {
+  background-color: var(--buttonCyanActive) !important;
+  color: var(--buttonContentColorActive);
+}
+
+button[variant='outlined'][color='cyan'] svg {
+  fill: var(--buttonCyan);
+}
+
+button svg {
+  width: 13px;
+  height: 13px;
+  margin-right: 10px;
+  fill: #000;
+  transition: fill 100ms;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row.justify-content-center,
+.column.justify-content-center {
+  justify-content: center;
+}
+
+.row.align-items-center,
+.column.align-items-center {
+  align-items: center;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-input {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-input label {
+  margin-left: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--textInputLabelColor);
+}
+
+.text-input input[type='text'],
+.text-input input[type='password'] {
+  padding: 10px;
+  border: 2px solid var(--textInputBorderColor);
+  border-radius: 3px;
+  background-color: var(--textInputBg);
+  color: var(--textInputColor);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 100ms, color 100ms, border-color 100ms;
+}
+
+.text-input input[type='text']:focus,
+.text-input input[type='password']:focus {
+  background-color: var(--textInputBgFocus);
+  color: var(--textInputColorFocus);
+  border-color: var(--textInputBorderColorFocus);
+}
+
+.text-input > span {
+  margin-top: 5px;
+  margin-left: 10px;
+  font-size: 11px;
+  color: var(--red);
+}
+
+.select {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.select label {
+  margin-left: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #dedede;
+}
+
+.select select {
+  padding: 10px;
+  border: 2px solid var(--textInputBorderColor);
+  border-radius: 3px;
+  background-color: var(--textInputBg);
+  color: var(--textInputColor);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 100ms, color 100ms, border-color 100ms;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox label {
+  cursor: pointer;
+  user-select: none;
+  margin-left: 10px;
+  font-size: 13px;
+  color: var(--checkboxLabelColor);
+}
+
+.checkbox input[type='checkbox'] {
+  cursor: pointer;
+}
