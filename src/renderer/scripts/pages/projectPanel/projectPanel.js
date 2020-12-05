@@ -17,7 +17,9 @@ async function projectPanel () {
   const bot = {
     status: 'offline',
     process: null,
-    storage: JSON.parse(await readFile(path.join(project.path, 'storage.json'), 'utf-8'))
+    storage: JSON.parse(
+      await readFile(path.join(project.path, 'storage.json'), 'utf-8')
+    )
   }
 
   document.title += ' - ' + project.name
@@ -39,11 +41,15 @@ async function projectPanel () {
     if (projectAvatarElem.style.border) return
 
     projectControlElem.classList.add('fadeInRight-200')
-    projectAvatarElem.style.border = '3px solid var(--projectPanelMenuProjectAvatarBorderColor)'
+    projectAvatarElem.style.border =
+      '3px solid var(--projectPanelMenuProjectAvatarBorderColor)'
     projectControlElem.style.display = 'flex'
 
     document.onclick = (event) => {
-      if (event.target.getAttribute('name') !== 'project-control' && event.target.getAttribute('name') !== 'project-avatar') {
+      if (
+        event.target.getAttribute('name') !== 'project-control' &&
+        event.target.getAttribute('name') !== 'project-avatar'
+      ) {
         document.onclick = null
         projectControlElem.classList.remove('fadeInRight-200')
         projectControlElem.classList.add('fadeOutRight-200')
@@ -58,14 +64,20 @@ async function projectPanel () {
 
   projectControlElem.querySelectorAll('button')[0].onclick = () => {
     if (bot.status !== 'online') {
-      bot.process = childProcess.spawn(window.DBC.node, [path.join(project.path, 'bot.js')], {
-        cwd: project.path
-      })
-      bot.process.stdout.on('data', data => {
+      bot.process = childProcess.spawn(
+        window.DBC.node,
+        [path.join(project.path, 'bot.js')],
+        {
+          cwd: project.path
+        }
+      )
+      bot.process.stdout.on('data', (data) => {
         if (data.includes('Bot started')) {
           bot.status = 'online'
-          projectInfoElem.style.backgroundColor = 'var(--projectPanelMenuProjectInfoOnlineBg)'
-          projectControlElem.style.backgroundColor = 'var(--projectPanelMenuProjectInfoOnlineBg)'
+          projectInfoElem.style.backgroundColor =
+            'var(--projectPanelMenuProjectInfoOnlineBg)'
+          projectControlElem.style.backgroundColor =
+            'var(--projectPanelMenuProjectInfoOnlineBg)'
         }
       })
     }
@@ -76,8 +88,10 @@ async function projectPanel () {
       bot.process.stdout.pause()
       bot.process.kill()
       bot.status = 'offline'
-      projectInfoElem.style.backgroundColor = 'var(--projectPanelMenuProjectInfoOfflineBg)'
-      projectControlElem.style.backgroundColor = 'var(--projectPanelMenuProjectInfoOfflineBg)'
+      projectInfoElem.style.backgroundColor =
+        'var(--projectPanelMenuProjectInfoOfflineBg)'
+      projectControlElem.style.backgroundColor =
+        'var(--projectPanelMenuProjectInfoOfflineBg)'
     }
   }
 

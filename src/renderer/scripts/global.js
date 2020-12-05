@@ -1,24 +1,30 @@
 const { ipcRenderer } = require('electron')
+const { join } = require('path')
 const { homedir } = require('os')
-const path = require('path')
-const { readFile } = require('fs-extra')
+const { pathExists, readFile } = require('fs-extra')
 
 async function global () {
+  const appPath = await ipcRenderer.invoke('get-app-path')
+  const nodePath = join(homedir(), '.dbc', 'node')
+
   window.DBC = {
-    appPath: await ipcRenderer.invoke('get-app-path'),
+    appPath,
+    rendererPath: pathExists(appPath + '/src')
+      ? join(appPath, 'src', 'renderer')
+      : join(appPath, 'build', 'renderer'),
     node:
       process.platform === 'win32'
-        ? path.join(homedir(), '.dbc', 'node', 'node.exe')
-        : path.join(homedir(), '.dbc', 'node', 'bin', 'node'),
+        ? join(nodePath, 'node.exe')
+        : join(nodePath, 'bin', 'node'),
     npm:
       process.platform === 'win32'
-        ? path.join(homedir(), '.dbc', 'node', 'npm.cmd')
-        : path.join(homedir(), '.dbc', 'node', 'bin', 'npm')
+        ? join(nodePath, 'npm.cmd')
+        : join(nodePath, 'bin', 'npm')
   }
 
   for (const elem of document.querySelectorAll('*[icon]')) {
     const svg = await readFile(
-      path.join(
+      join(
         window.DBC.appPath,
         'node_modules',
         '@discord-bot-creator',

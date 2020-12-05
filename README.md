@@ -1,8 +1,8 @@
 <div align="center">
   <img 
-    src="./resources/icon.png" 
-    width="200px" 
-    height="200px"
+    src="https://discord-bot-creator.github.io/img/logo.svg" 
+    width="180px" 
+    height="180px"
     alt="DBC Logo"
   >
   <h1>

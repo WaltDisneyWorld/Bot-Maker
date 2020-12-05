@@ -2,7 +2,7 @@
   "appId": "org.discord-bot-creator.discord-bot-creator",
   "productName": "Discord Bot Creator",
   "copyright": "Copyright © 2020 Discord Bot Creator",
-  "files": ["./main.js", "./LICENSE", "./renderer", "./resources"],
+  "files": ["./build"],
   "directories": {
     "buildResources": "./build/resources"
   },

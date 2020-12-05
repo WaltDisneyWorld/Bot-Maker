@@ -7,23 +7,22 @@
 
 const { homedir } = require('os')
 const { ipcRenderer } = require('electron')
-const { pathExists, readFile, mkdir, copyFile } = require('fs-extra')
-const path = require('path')
-const spawn = require('util').promisify(require('child_process').spawn)
+const { pathExists, readFile, mkdir, copy } = require('fs-extra')
+const { join } = require('path')
+const exec = require('util').promisify(require('child_process').exec)
 
 const projectAvatarElem = document.querySelector('img')
 projectAvatarElem.onerror = () => {
   projectAvatarElem.src = 'https://i.imgur.com/3RzaW3Q.png'
 }
-
 document.getElementById('project-avatar').onchange = (event) => {
   projectAvatarElem.src = event.target.value
 }
 
-document.getElementById('project-path').value =
-  process.platform === 'win32' ? homedir() + '\\Desktop' : homedir()
-
-document.querySelector('form div:nth-child(5) button').onclick = async (event) => {
+document.getElementById('project-path').value = process.platform === 'win32' ? join(homedir(), 'Desktop') : homedir()
+document.querySelector('form div:nth-child(5) button').onclick = async (
+  event
+) => {
   const path = await ipcRenderer.invoke(
     'open-directory-dialog-with-creating-project-modal'
   )
@@ -31,7 +30,6 @@ document.querySelector('form div:nth-child(5) button').onclick = async (event) =
     document.getElementById('project-path').value = path.filePaths[0]
   }
 }
-
 document.querySelectorAll('button')[1].onclick = async (event) => {
   event.preventDefault()
 
@@ -51,7 +49,7 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
   const projectDescription = document.getElementById('project-description')
     .value
   const projectPath = document.getElementById('project-path').value
-  const realProjectPath = path.join(projectPath, projectName)
+  const realProjectPath = join(projectPath, projectName)
 
   if (!projectAvatar) {
     setTextInputError('#project-avatar', 'Please fill out this field.')
@@ -74,12 +72,13 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
       loadingScreenElem.id = 'loading-screen'
       loadingScreenElem.classList.add('fadeIn-200')
       loadingScreenElem.innerHTML = `${await readFile(
-        window.DBC.appPath + '/renderer/assets/img/loader.svg', 'utf-8'
+        window.DBC.rendererPath + '/assets/img/loader.svg',
+        'utf-8'
       )}<p>Copying project files<p>`
       const loadingScreenMessageElem = loadingScreenElem.querySelector('p')
 
       const formElem = document.querySelector('form')
-      formElem.style.transition = 'opacity 200ms, filter 200ms'
+      formElem.style.transition = '200ms'
       formElem.style.opacity = '0.3'
       formElem.style.filter = 'blur(3px)'
       formElem.style.pointerEvents = 'none'
@@ -89,25 +88,25 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
 
       setTimeout(async () => {
         await mkdir(realProjectPath)
-        await copyFile(
+        await copy(
           window.DBC.appPath + '/node_modules/@discord-bot-creator/bot/bot.js',
-          path.join(realProjectPath, 'bot.js')
+          join(realProjectPath, 'bot.js')
         )
-        await copyFile(
+        await copy(
           window.DBC.appPath +
             '/node_modules/@discord-bot-creator/bot/storage.json',
-          path.join(realProjectPath, 'storage.json')
+          join(realProjectPath, 'storage.json')
         )
-        await copyFile(
+        await copy(
           window.DBC.appPath +
             '/node_modules/@discord-bot-creator/bot/package-template.json',
-          path.join(realProjectPath, 'package.json')
+          join(realProjectPath, 'package.json')
         )
 
         setTimeout(async () => {
           loadingScreenMessageElem.innerText = 'Downloading dependencies'
 
-          await spawn(window.DBC.npm, ['install'], { cwd: realProjectPath })
+          await exec(window.DBC.npm + ' i', { cwd: realProjectPath })
 
           const projects =
             (await ipcRenderer.invoke('store-get', 'projects')) || {}

@@ -10,7 +10,7 @@ import verifyDBCNode from './verifyDBCNode.js'
 const { ipcRenderer } = require('electron')
 
 async function load () {
-  await verifyDBCNode('14.15.0')
+  await verifyDBCNode('14.15.1')
   ipcRenderer.send('dbc-loaded')
 }
 

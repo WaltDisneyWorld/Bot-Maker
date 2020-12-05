@@ -193,7 +193,10 @@ export default function config (bot, project) {
     if (projectBotIntentsGuildMembersElem.checked) {
       bot.storage.config.intents.push('GUILD_MEMBERS')
     } else {
-      bot.storage.config.intents.splice(bot.storage.config.intents.indexOf('GUILD_MEMBERS'), 1)
+      bot.storage.config.intents.splice(
+        bot.storage.config.intents.indexOf('GUILD_MEMBERS'),
+        1
+      )
     }
     writeFile(
       path.join(project.path, 'storage.json'),
@@ -205,7 +208,10 @@ export default function config (bot, project) {
     if (projectBotIntentsGuildBansElem.checked) {
       bot.storage.config.intents.push('GUILD_BANS')
     } else {
-      bot.storage.config.intents.splice(bot.storage.config.intents.indexOf('GUILD_BANS'), 1)
+      bot.storage.config.intents.splice(
+        bot.storage.config.intents.indexOf('GUILD_BANS'),
+        1
+      )
     }
     writeFile(
       path.join(project.path, 'storage.json'),
@@ -217,7 +223,10 @@ export default function config (bot, project) {
     if (projectBotIntentsGuildEmojisElem.checked) {
       bot.storage.config.intents.push('GUILD_EMOJIS')
     } else {
-      bot.storage.config.intents.splice(bot.storage.config.intents.indexOf('GUILD_EMOJIS'), 1)
+      bot.storage.config.intents.splice(
+        bot.storage.config.intents.indexOf('GUILD_EMOJIS'),
+        1
+      )
     }
     writeFile(
       path.join(project.path, 'storage.json'),
@@ -244,7 +253,10 @@ export default function config (bot, project) {
     if (projectBotIntentsGuildWebhooksElem.checked) {
       bot.storage.config.intents.push('GUILD_WEBHOOKS')
     } else {
-      bot.storage.config.intents.splice(bot.storage.config.intents.indexOf('GUILD_WEBHOOKS'), 1)
+      bot.storage.config.intents.splice(
+        bot.storage.config.intents.indexOf('GUILD_WEBHOOKS'),
+        1
+      )
     }
     writeFile(
       path.join(project.path, 'storage.json'),
@@ -256,7 +268,10 @@ export default function config (bot, project) {
     if (projectBotIntentsGuildInvitesElem.checked) {
       bot.storage.config.intents.push('GUILD_INVITES')
     } else {
-      bot.storage.config.intents.splice(bot.storage.config.intents.indexOf('GUILD_INVITES'), 1)
+      bot.storage.config.intents.splice(
+        bot.storage.config.intents.indexOf('GUILD_INVITES'),
+        1
+      )
     }
     writeFile(
       path.join(project.path, 'storage.json'),

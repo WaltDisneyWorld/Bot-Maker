@@ -5,16 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
-  app,
-  BrowserWindow,
-  ipcMain,
-  dialog,
-  Notification
-} = require('electron')
-const path = require('path')
-const Store = require('electron-store')
-const { pathExists } = require('fs-extra')
+import { app, BrowserWindow, ipcMain, dialog, Notification } from 'electron'
+import { join } from 'path'
+import * as Store from 'electron-store'
+import { pathExists } from 'fs-extra'
+
+import { DBCProjects } from './interfaces'
 
 app.once('ready', () => {
   const loadWindow = new BrowserWindow({
@@ -22,7 +18,7 @@ app.once('ready', () => {
     center: true,
     frame: false,
     resizable: false,
-    icon: path.join(__dirname, '/resources/icon.png'),
+    icon: join(__dirname, '/resources/icon.png'),
     title: 'Loading | Discord Bot Creator',
     width: 250,
     height: 255,
@@ -35,7 +31,7 @@ app.once('ready', () => {
     center: true,
     resizable: false,
     autoHideMenuBar: true,
-    icon: path.join(__dirname, '/resources/icon.png'),
+    icon: join(__dirname, '/resources/icon.png'),
     title: 'Discord Bot Creator',
     width: 610,
     height: 300,
@@ -50,7 +46,7 @@ app.once('ready', () => {
     modal: true,
     parent: startWindow,
     autoHideMenuBar: true,
-    icon: path.join(__dirname, '/resources/icon.png'),
+    icon: join(__dirname, '/resources/icon.png'),
     title: 'Discord Bot Creator | Creating Project',
     width: 480,
     height: 640,
@@ -62,7 +58,7 @@ app.once('ready', () => {
     show: false,
     center: true,
     autoHideMenuBar: true,
-    icon: path.join(__dirname, '/resources/icon.png'),
+    icon: join(__dirname, '/resources/icon.png'),
     title: 'Discord Bot Creator | Project Panel',
     webPreferences: {
       nodeIntegration: true
@@ -71,7 +67,7 @@ app.once('ready', () => {
 
   const DBCStore = new Store()
 
-  loadWindow.loadFile(path.join(__dirname, '/renderer/pages/load.html'))
+  loadWindow.loadFile(join(__dirname, '/renderer/pages/load.html'))
   loadWindow.webContents.once('did-finish-load', () => loadWindow.show())
 
   startWindow.on('close', () => {
@@ -88,28 +84,28 @@ app.once('ready', () => {
   })
 
   ipcMain.once('dbc-loaded', async () => {
-    startWindow.loadFile(path.join(__dirname, '/renderer/pages/start.html'))
+    startWindow.loadFile(join(__dirname, '/renderer/pages/start.html'))
     startWindow.webContents.once('did-finish-load', () => {
       creatingProjctModal.loadFile(
-        path.join(__dirname, '/renderer/pages/creatingProject.html')
+        join(__dirname, '/renderer/pages/creatingProject.html')
       )
       creatingProjctModal.webContents.once('did-finish-load', async () => {
-        const projects = DBCStore.get('projects')
+        const projects = DBCStore.get<any, DBCProjects>('projects')
+
         if (projects && projects.working) {
           if (!(await pathExists(projects.working.path))) {
             delete projects.working
             DBCStore.set('projects', projects)
+
             loadWindow.close()
             startWindow.show()
           } else {
             projectPanelWindow.loadFile(
-              path.join(__dirname, '/renderer/pages/projectPanel.html')
+              join(__dirname, '/renderer/pages/projectPanel.html')
             )
             projectPanelWindow.webContents.once('did-finish-load', () => {
-              setTimeout(() => {
-                loadWindow.close()
-                projectPanelWindow.show()
-              }, 1000)
+              loadWindow.close()
+              projectPanelWindow.show()
             })
           }
         } else {
@@ -123,11 +119,11 @@ app.once('ready', () => {
   ipcMain.on('load-window-close', () => loadWindow.close())
   ipcMain.on('project-panel-window-show', () => {
     projectPanelWindow.loadFile(
-      path.join(__dirname, '/renderer/pages/projectPanel.html')
+      join(__dirname, '/renderer/pages/projectPanel.html')
     )
-    projectPanelWindow.webContents.once('did-finish-load', () => {
-      setTimeout(() => projectPanelWindow.show(), 1000)
-    })
+    projectPanelWindow.webContents.once('did-finish-load', () =>
+      projectPanelWindow.show()
+    )
   })
   ipcMain.on('project-panel-window-close', () => {
     projectPanelWindow.close()
