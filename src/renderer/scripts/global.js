@@ -9,7 +9,7 @@ async function global () {
 
   window.DBC = {
     appPath,
-    rendererPath: pathExists(appPath + '/src')
+    rendererPath: (await pathExists(appPath + '/src'))
       ? join(appPath, 'src', 'renderer')
       : join(appPath, 'build', 'renderer'),
     node:

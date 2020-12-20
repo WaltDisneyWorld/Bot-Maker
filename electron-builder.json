@@ -12,12 +12,6 @@
   },
   "linux": {
     "icon": "icon.png",
-    "target": ["deb"]
-  },
-  "nsis": {
-    "license": "./LICENSE",
-    "oneClick": false,
-    "allowToChangeInstallationDirectory": true,
-    "runAfterFinish": false
+    "target": ["tar.xz"]
   }
 }

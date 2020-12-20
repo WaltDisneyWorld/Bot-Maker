@@ -19,7 +19,8 @@ document.getElementById('project-avatar').onchange = (event) => {
   projectAvatarElem.src = event.target.value
 }
 
-document.getElementById('project-path').value = process.platform === 'win32' ? join(homedir(), 'Desktop') : homedir()
+document.getElementById('project-path').value =
+  process.platform === 'win32' ? join(homedir(), 'Desktop') : homedir()
 document.querySelector('form div:nth-child(5) button').onclick = async (
   event
 ) => {
