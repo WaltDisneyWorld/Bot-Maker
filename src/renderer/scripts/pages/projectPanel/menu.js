@@ -42,9 +42,10 @@ export default function menu () {
 
   projectControlElem.querySelectorAll('button')[0].onclick = () => {
     if (window.bot.status !== 'online') {
-      projectInfoElem.style.borderColor = 'var(--projectPanelMenuProjectInfoStartingBorderColor)'
+      projectInfoElem.style.borderColor =
+        'var(--projectPanelMenuProjectInfoStartingBorderColor)'
       projectControlElem.style.borderColor =
-            'var(--projectPanelMenuProjectInfoStartingBorderColor)'
+        'var(--projectPanelMenuProjectInfoStartingBorderColor)'
       window.bot.process = childProcess.spawn(
         window.env.node,
         [join(window.project.path, 'bot.js')],

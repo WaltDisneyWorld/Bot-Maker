@@ -108,10 +108,16 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
           loadingScreenMessageElem.innerText = 'Downloading dependencies'
           await exec(window.env.npm + ' i', { cwd: realProjectPath })
 
-          const storage = JSON.parse(await readFile(join(realProjectPath, 'storage.json'), 'utf-8'))
+          const storage = JSON.parse(
+            await readFile(join(realProjectPath, 'storage.json'), 'utf-8')
+          )
           storage.avatar = projectAvatar
           storage.description = projectDescription
-          await writeFile(join(realProjectPath, 'storage.json'), JSON.stringify(storage), 'utf-8')
+          await writeFile(
+            join(realProjectPath, 'storage.json'),
+            JSON.stringify(storage),
+            'utf-8'
+          )
 
           const projects =
             (await ipcRenderer.invoke('store-get', 'projects')) || {}

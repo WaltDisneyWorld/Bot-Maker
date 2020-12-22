@@ -155,7 +155,7 @@ button:active svg {
 }
 
 button[color='white']:active svg {
-  fill: var(--buttonWhiteContentColorActive)
+  fill: var(--buttonWhiteContentColorActive);
 }
 
 button[variant='outlined'] {

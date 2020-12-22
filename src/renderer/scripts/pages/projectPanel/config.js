@@ -154,7 +154,8 @@ export default function config () {
     }
   }
   projectBotCaseSensitiveElem.onchange = () => {
-    window.bot.storage.config.caseSensitive = projectBotCaseSensitiveElem.checked
+    window.bot.storage.config.caseSensitive =
+      projectBotCaseSensitiveElem.checked
   }
   projectBotIntentsGuildMembersElem.onchange = () => {
     if (projectBotIntentsGuildMembersElem.checked) {
