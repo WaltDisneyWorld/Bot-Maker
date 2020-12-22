@@ -46,16 +46,16 @@
   --buttonYellowContentColor: #000;
   --buttonYellowContentColorHover: #000;
   --buttonYellowContentColorActive: #000;
+  --buttonSvgColor: #000;
 
-  --textInputLabelColor: #dadada;
+  --textInputLabelColor: #afafaf;
   --textInputBg: #22222c;
-  --textInputColor: #a7a7a7;
+  --textInputColor: #fff;
   --textInputBorderColor: var(--purple);
   --textInputBgFocus: #1c1c23;
-  --textInputColorFocus: #fff;
   --textInputBorderColorFocus: var(--pink);
 
-  --checkboxLabelColor: #dadada;
+  --checkboxLabelColor: #fff;
 
   --notificationBg: #21222c;
   --notificationCloseBg: #44475a;
@@ -65,9 +65,11 @@
   --notificationAlertColor: var(--yellow);
 
   --projectPanelMenuBg: #21222c;
-  --projectPanelMenuProjectInfoOfflineBg: var(--blue);
-  --projectPanelMenuProjectInfoOnlineBg: #4ab666;
-  --projectPanelMenuProjectInfoErrorBg: var(--red);
+  --projectPanelMenuProjectInfoBg: var(--blue);
+  --projectPanelMenuProjectInfoOfflineBorderColor: #fff;
+  --projectPanelMenuProjectInfoStartingBorderColor: var(--purple);
+  --projectPanelMenuProjectInfoOnlineBorderColor: var(--green);
+  --projectPanelMenuProjectInfoErrorBorderColor: var(--red);
   --projectPanelMenuProjectAvatarBorderColor: #fff;
   --projectPanelMenuProjectControlBg: #21222c;
   --projectPanelSectionsMenuHoverBg: #44475a;
@@ -99,7 +101,6 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--mainColor);
-  border-radius: 3px 0 0 3px;
 }
 
 body {
@@ -141,8 +142,20 @@ button:active {
   color: var(--buttonContentColorActive);
 }
 
+button svg {
+  width: 13px;
+  height: 13px;
+  margin-right: 10px;
+  fill: var(--buttonSvgColor);
+  transition: fill 100ms;
+}
+
 button:active svg {
   fill: var(--buttonContentColorActive);
+}
+
+button[color='white']:active svg {
+  fill: var(--buttonWhiteContentColorActive)
 }
 
 button[variant='outlined'] {
@@ -378,14 +391,6 @@ button[variant='outlined'][color='cyan'] svg {
   fill: var(--buttonCyan);
 }
 
-button svg {
-  width: 13px;
-  height: 13px;
-  margin-right: 10px;
-  fill: #000;
-  transition: fill 100ms;
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -422,7 +427,6 @@ button svg {
 }
 
 .text-input label {
-  margin-left: 10px;
   margin-bottom: 8px;
   font-size: 12px;
   font-weight: bold;
@@ -443,7 +447,6 @@ button svg {
 .text-input input[type='text']:focus,
 .text-input input[type='password']:focus {
   background-color: var(--textInputBgFocus);
-  color: var(--textInputColorFocus);
   border-color: var(--textInputBorderColorFocus);
 }
 

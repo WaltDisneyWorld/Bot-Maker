@@ -7,7 +7,7 @@
 
 const { homedir } = require('os')
 const { ipcRenderer } = require('electron')
-const { pathExists, readFile, mkdir, copy } = require('fs-extra')
+const { pathExists, readFile, mkdir, copy, writeFile } = require('fs-extra')
 const { join } = require('path')
 const exec = require('util').promisify(require('child_process').exec)
 
@@ -73,7 +73,7 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
       loadingScreenElem.id = 'loading-screen'
       loadingScreenElem.classList.add('fadeIn-200')
       loadingScreenElem.innerHTML = `${await readFile(
-        window.DBC.rendererPath + '/assets/img/loader.svg',
+        window.env.rendererPath + '/assets/img/loader.svg',
         'utf-8'
       )}<p>Copying project files<p>`
       const loadingScreenMessageElem = loadingScreenElem.querySelector('p')
@@ -90,24 +90,28 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
       setTimeout(async () => {
         await mkdir(realProjectPath)
         await copy(
-          window.DBC.appPath + '/node_modules/@discord-bot-creator/bot/bot.js',
+          window.env.appPath + '/node_modules/@discord-bot-creator/bot/bot.js',
           join(realProjectPath, 'bot.js')
         )
         await copy(
-          window.DBC.appPath +
+          window.env.appPath +
             '/node_modules/@discord-bot-creator/bot/storage.json',
           join(realProjectPath, 'storage.json')
         )
         await copy(
-          window.DBC.appPath +
+          window.env.appPath +
             '/node_modules/@discord-bot-creator/bot/package-template.json',
           join(realProjectPath, 'package.json')
         )
 
         setTimeout(async () => {
           loadingScreenMessageElem.innerText = 'Downloading dependencies'
+          await exec(window.env.npm + ' i', { cwd: realProjectPath })
 
-          await exec(window.DBC.npm + ' i', { cwd: realProjectPath })
+          const storage = JSON.parse(await readFile(join(realProjectPath, 'storage.json'), 'utf-8'))
+          storage.avatar = projectAvatar
+          storage.description = projectDescription
+          await writeFile(join(realProjectPath, 'storage.json'), JSON.stringify(storage), 'utf-8')
 
           const projects =
             (await ipcRenderer.invoke('store-get', 'projects')) || {}

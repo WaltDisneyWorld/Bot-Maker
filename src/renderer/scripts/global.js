@@ -7,7 +7,7 @@ async function global () {
   const appPath = await ipcRenderer.invoke('get-app-path')
   const nodePath = join(homedir(), '.dbc', 'node')
 
-  window.DBC = {
+  window.env = {
     appPath,
     rendererPath: (await pathExists(appPath + '/src'))
       ? join(appPath, 'src', 'renderer')
@@ -25,7 +25,7 @@ async function global () {
   for (const elem of document.querySelectorAll('*[icon]')) {
     const svg = await readFile(
       join(
-        window.DBC.appPath,
+        window.env.appPath,
         'node_modules',
         '@discord-bot-creator',
         'icons',

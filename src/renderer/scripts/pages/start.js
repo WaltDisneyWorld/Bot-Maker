@@ -7,8 +7,6 @@
 
 const { ipcRenderer } = require('electron')
 
-document.title += ' | v' + process.env.npm_package_version
-
-document.querySelectorAll('button')[0].onclick = () => [
+document.querySelectorAll('button')[0].onclick = () => {
   ipcRenderer.send('creating-project-modal-show')
-]
+}

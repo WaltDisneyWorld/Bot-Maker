@@ -1,7 +1,4 @@
-const { writeFile } = require('fs-extra')
-const path = require('path')
-
-export default function config (bot, project) {
+export default function config () {
   const projectAvatarElem = document.getElementById('project-avatar')
   const projectDescriptionElem = document.getElementById('project-description')
   const projectBotOwnersElem = document.getElementById('project-bot-owners')
@@ -56,13 +53,13 @@ export default function config (bot, project) {
     'project-bot-intents-direct-message-typing'
   )
 
-  projectAvatarElem.value = bot.storage.config.avatar
-  projectDescriptionElem.value = bot.storage.config.description
-  projectBotOwnersElem.value = bot.storage.config.owners.join(', ')
-  projectBotTokenElem.value = bot.storage.config.token
-  projectBotPrefixElem.value = bot.storage.config.prefix
-  projectBotCaseSensitiveElem.checked = bot.storage.config.caseSensitive
-  for (const intent of bot.storage.config.intents) {
+  projectAvatarElem.value = window.bot.storage.config.avatar
+  projectDescriptionElem.value = window.bot.storage.config.description
+  projectBotOwnersElem.value = window.bot.storage.config.owners.join(', ')
+  projectBotTokenElem.value = window.bot.storage.config.token
+  projectBotPrefixElem.value = window.bot.storage.config.prefix
+  projectBotCaseSensitiveElem.checked = window.bot.storage.config.caseSensitive
+  for (const intent of window.bot.storage.config.intents) {
     switch (intent) {
       case 'GUILDS':
         projectBotIntentsGuildsElem.checked = true
@@ -119,13 +116,8 @@ export default function config (bot, project) {
         'Please fill out this field.'
     } else {
       projectAvatarElem.nextSibling.nextSibling.innerText = ''
-      bot.storage.config.avatar = projectAvatarElem.value
+      window.bot.storage.config.avatar = projectAvatarElem.value
       projectAvatarImgElem.src = projectAvatarElem.value
-      writeFile(
-        path.join(project.path, 'storage.json'),
-        JSON.stringify(bot.storage, null, 2),
-        'utf-8'
-      )
     }
   }
   projectDescriptionElem.onchange = () => {
@@ -134,24 +126,14 @@ export default function config (bot, project) {
         'Please fill out this field.'
     } else {
       projectAvatarElem.nextSibling.nextSibling.innerText = ''
-      bot.storage.config.description = projectDescriptionElem.value
-      projectAvatarImgElem.title = `Name: ${project.name}\nDescription: ${bot.storage.config.description}`
-      writeFile(
-        path.join(project.path, 'storage.json'),
-        JSON.stringify(bot.storage, null, 2),
-        'utf-8'
-      )
+      window.bot.storage.config.description = projectDescriptionElem.value
+      projectAvatarImgElem.title = `Name: ${window.project.name}\nDescription: ${window.bot.storage.config.description}`
     }
   }
   projectBotOwnersElem.onchange = () => {
-    bot.storage.config.owners = projectBotOwnersElem.value
+    window.bot.storage.config.owners = projectBotOwnersElem.value
       ? projectBotOwnersElem.value.split(', ')
       : []
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotTokenElem.onchange = () => {
     if (!projectBotTokenElem.value) {
@@ -159,12 +141,7 @@ export default function config (bot, project) {
         'Please fill out this field.'
     } else {
       projectAvatarElem.nextSibling.nextSibling.innerText = ''
-      bot.storage.config.token = projectBotTokenElem.value
-      writeFile(
-        path.join(project.path, 'storage.json'),
-        JSON.stringify(bot.storage, null, 2),
-        'utf-8'
-      )
+      window.bot.storage.config.token = projectBotTokenElem.value
     }
   }
   projectBotPrefixElem.onchange = () => {
@@ -173,215 +150,140 @@ export default function config (bot, project) {
         'Please fill out this field.'
     } else {
       projectBotPrefixElem.nextSibling.nextSibling.innerText = ''
-      bot.storage.config.prefix = projectBotPrefixElem.value
-      writeFile(
-        path.join(project.path, 'storage.json'),
-        JSON.stringify(bot.storage, null, 2),
-        'utf-8'
-      )
+      window.bot.storage.config.prefix = projectBotPrefixElem.value
     }
   }
   projectBotCaseSensitiveElem.onchange = () => {
-    bot.storage.config.caseSensitive = projectBotCaseSensitiveElem.checked
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
+    window.bot.storage.config.caseSensitive = projectBotCaseSensitiveElem.checked
   }
   projectBotIntentsGuildMembersElem.onchange = () => {
     if (projectBotIntentsGuildMembersElem.checked) {
-      bot.storage.config.intents.push('GUILD_MEMBERS')
+      window.bot.storage.config.intents.push('GUILD_MEMBERS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_MEMBERS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_MEMBERS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildBansElem.onchange = () => {
     if (projectBotIntentsGuildBansElem.checked) {
-      bot.storage.config.intents.push('GUILD_BANS')
+      window.bot.storage.config.intents.push('GUILD_BANS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_BANS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_BANS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildEmojisElem.onchange = () => {
     if (projectBotIntentsGuildEmojisElem.checked) {
-      bot.storage.config.intents.push('GUILD_EMOJIS')
+      window.bot.storage.config.intents.push('GUILD_EMOJIS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_EMOJIS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_EMOJIS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildIntegrationsElem.onchange = () => {
     if (projectBotIntentsGuildIntegrationsElem.checked) {
-      bot.storage.config.intents.push('GUILD_INTEGRATIONS')
+      window.bot.storage.config.intents.push('GUILD_INTEGRATIONS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_INTEGRATIONS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_INTEGRATIONS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildWebhooksElem.onchange = () => {
     if (projectBotIntentsGuildWebhooksElem.checked) {
-      bot.storage.config.intents.push('GUILD_WEBHOOKS')
+      window.bot.storage.config.intents.push('GUILD_WEBHOOKS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_WEBHOOKS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_WEBHOOKS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildInvitesElem.onchange = () => {
     if (projectBotIntentsGuildInvitesElem.checked) {
-      bot.storage.config.intents.push('GUILD_INVITES')
+      window.bot.storage.config.intents.push('GUILD_INVITES')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_INVITES'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_INVITES'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildVoiceStatesElem.onchange = () => {
     if (projectBotIntentsGuildVoiceStatesElem.checked) {
-      bot.storage.config.intents.push('GUILD_VOICE_STATES')
+      window.bot.storage.config.intents.push('GUILD_VOICE_STATES')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_VOICE_STATES'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_VOICE_STATES'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildPresencesElem.onchange = () => {
     if (projectBotIntentsGuildPresencesElem.checked) {
-      bot.storage.config.intents.push('GUILD_PRESENCES')
+      window.bot.storage.config.intents.push('GUILD_PRESENCES')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_PRESENCES'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_PRESENCES'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildMessageReactionsElem.onchange = () => {
     if (projectBotIntentsDirectMessageReactionsElem.checked) {
-      bot.storage.config.intents.push('GUILD_MESSAGE_REACTIONS')
+      window.bot.storage.config.intents.push('GUILD_MESSAGE_REACTIONS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_MESSAGE_REACTIONS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_MESSAGE_REACTIONS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsGuildMessageTypingElem.onchange = () => {
     if (projectBotIntentsGuildMessageTypingElem.checked) {
-      bot.storage.config.intents.push('GUILD_MESSAGE_TYPING')
+      window.bot.storage.config.intents.push('GUILD_MESSAGE_TYPING')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('GUILD_MESSAGE_TYPING'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('GUILD_MESSAGE_TYPING'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsDirectMessagesElem.onchange = () => {
     if (projectBotIntentsDirectMessagesElem.checked) {
-      bot.storage.config.intents.push('DIRECT_MESSAGES')
+      window.bot.storage.config.intents.push('DIRECT_MESSAGES')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('DIRECT_MESSAGES'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('DIRECT_MESSAGES'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsDirectMessageReactionsElem.onchange = () => {
     if (projectBotIntentsDirectMessageReactionsElem.checked) {
-      bot.storage.config.intents.push('DIRECT_MESSAGE_REACTIONS')
+      window.bot.storage.config.intents.push('DIRECT_MESSAGE_REACTIONS')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('DIRECT_MESSAGE_REACTIONS'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('DIRECT_MESSAGE_REACTIONS'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
   projectBotIntentsDirectMessageTypingElem.onchange = () => {
     if (projectBotIntentsDirectMessageTypingElem.checked) {
-      bot.storage.config.intents.push('DIRECT_MESSAGE_TYPING')
+      window.bot.storage.config.intents.push('DIRECT_MESSAGE_TYPING')
     } else {
-      bot.storage.config.intents.splice(
-        bot.storage.config.intents.indexOf('DIRECT_MESSAGE_TYPING'),
+      window.bot.storage.config.intents.splice(
+        window.bot.storage.config.intents.indexOf('DIRECT_MESSAGE_TYPING'),
         1
       )
     }
-    writeFile(
-      path.join(project.path, 'storage.json'),
-      JSON.stringify(bot.storage, null, 2),
-      'utf-8'
-    )
   }
 }

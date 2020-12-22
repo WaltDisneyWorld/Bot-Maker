@@ -7,7 +7,7 @@
     "buildResources": "./build/resources"
   },
   "win": {
-    "icon": "icon.ico",
+    "icon": "icon.png",
     "target": ["zip"]
   },
   "linux": {

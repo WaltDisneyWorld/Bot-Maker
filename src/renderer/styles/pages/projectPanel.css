@@ -12,9 +12,9 @@ menu > div:nth-child(1) {
   padding: 10px;
   display: flex;
   justify-content: center;
-  border-bottom: 5px solid var(--mainColor);
-  background-color: var(--projectPanelMenuProjectInfoOfflineBg);
-  transition: background-color 200ms;
+  background-color: var(--projectPanelMenuProjectInfoBg);
+  border-bottom: 5px solid var(--projectPanelMenuProjectInfoOfflineBorderColor);
+  transition: border-color 200ms;
 }
 
 menu > div:nth-child(1) img {
@@ -33,24 +33,25 @@ menu > div:nth-child(1) img:hover {
 menu > div:nth-child(1) div {
   z-index: -1;
   height: 70px;
-  padding: 13px;
-  padding-left: 8px;
+  padding: 10px;
   position: absolute;
   top: 0;
   left: 60px;
   border-radius: 0 0 5px 0;
-  border-bottom: 5px solid var(--mainColor);
-  background-color: var(--projectPanelMenuProjectInfoOfflineBg);
+  background-color: var(--projectPanelMenuProjectInfoBg);
+  border-bottom: 5px solid var(--projectPanelMenuProjectInfoOfflineBorderColor);
+  transition: border-color 200ms;
 }
 
 menu > div:nth-child(1) div button {
   margin-right: 5px;
-  width: 40px;
-  border-radius: 100%;
+  border-radius: 10%;
 }
 
-menu > div:nth-child(1) div button:last-child {
+menu > div:nth-child(1) div button svg {
   margin-right: 0;
+  width: 14px;
+  height: 14px;
 }
 
 menu > div:nth-child(2) div {
