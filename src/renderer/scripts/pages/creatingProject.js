@@ -80,15 +80,33 @@ document
       setTimeout(async () => {
         await mkdir(realProjectPath)
         await copy(
-          join(window.env.appPath, 'node_modules', '@discord-bot-creator', 'bot', 'bot.js'),
+          join(
+            window.env.appPath,
+            'node_modules',
+            '@discord-bot-creator',
+            'bot',
+            'bot.js'
+          ),
           join(realProjectPath, 'bot.js')
         )
         await copy(
-          join(window.env.appPath, 'node_modules', '@discord-bot-creator', 'bot', 'storage.json'),
+          join(
+            window.env.appPath,
+            'node_modules',
+            '@discord-bot-creator',
+            'bot',
+            'storage.json'
+          ),
           join(realProjectPath, 'storage.json')
         )
         await copy(
-          join(window.env.appPath, 'node_modules', '@discord-bot-creator', 'bot', 'package-template.json'),
+          join(
+            window.env.appPath,
+            'node_modules',
+            '@discord-bot-creator',
+            'bot',
+            'package-template.json'
+          ),
           join(realProjectPath, 'package.json')
         )
 

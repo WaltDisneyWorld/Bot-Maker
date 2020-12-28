@@ -83,7 +83,9 @@ app.once('ready', () => {
   })
 
   ipcMain.once('dbc-loaded', async () => {
-    startWindow.loadFile(join(__dirname, '..', 'renderer', 'pages', 'start.html'))
+    startWindow.loadFile(
+      join(__dirname, '..', 'renderer', 'pages', 'start.html')
+    )
     startWindow.webContents.once('did-finish-load', () => {
       creatingProjectModal.loadFile(
         join(__dirname, '..', 'renderer', 'pages', 'creatingProject.html')
