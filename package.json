@@ -2,7 +2,7 @@
   "name": "discord-bot-creator",
   "description": "A free open-source tool to create Discord Bots.",
   "version": "1.0.0-alpha",
-  "main": "./build/main.js",
+  "main": "./build/main/index.js",
   "homepage": "https://discord-bot-creator.github.io",
   "license": "GPL-3.0",
   "author": {

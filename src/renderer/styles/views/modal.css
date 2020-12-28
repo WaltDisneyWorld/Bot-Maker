@@ -1,0 +1,12 @@
+div:first-child {
+  height: 100vh;
+}
+
+#content {
+  padding: 13px;
+}
+
+div:nth-child(2) {
+  padding: 13px;
+  background-color: #21222c;
+}

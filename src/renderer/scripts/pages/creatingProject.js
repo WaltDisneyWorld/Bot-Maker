@@ -12,55 +12,46 @@ const { join } = require('path')
 const exec = require('util').promisify(require('child_process').exec)
 
 const projectAvatarElem = document.querySelector('img')
-projectAvatarElem.onerror = () => {
+projectAvatarElem.addEventListener('error', () => {
   projectAvatarElem.src = 'https://i.imgur.com/3RzaW3Q.png'
-}
-document.getElementById('project-avatar').onchange = (event) => {
-  projectAvatarElem.src = event.target.value
-}
+})
+document
+  .getElementById('project-avatar')
+  .addEventListener('change', (event) => {
+    projectAvatarElem.src = event.target.value
+  })
 
 document.getElementById('project-path').value =
   process.platform === 'win32' ? join(homedir(), 'Desktop') : homedir()
-document.querySelector('form div:nth-child(5) button').onclick = async (
-  event
-) => {
-  const path = await ipcRenderer.invoke(
-    'open-directory-dialog-with-creating-project-modal'
-  )
-  if (!path.canceled) {
-    document.getElementById('project-path').value = path.filePaths[0]
-  }
-}
-document.querySelectorAll('button')[1].onclick = async (event) => {
-  event.preventDefault()
+document
+  .querySelector('form div:nth-child(5) button')
+  .addEventListener('click', async (event) => {
+    const path = await ipcRenderer.invoke(
+      'open-directory-dialog-with-creating-project-modal'
+    )
+    if (!path.canceled) {
+      document.getElementById('project-path').value = path.filePaths[0]
+    }
+  })
 
-  function setTextInputError (selector, message) {
-    const textInputErrorElem = document.querySelector(selector)
-      .nextElementSibling
-    textInputErrorElem.innerText = message
-  }
+document
+  .querySelectorAll('button')[1]
+  .addEventListener('click', async (event) => {
+    event.preventDefault()
 
-  setTextInputError('#project-avatar', '')
-  setTextInputError('#project-name', '')
-  setTextInputError('#project-description', '')
-  setTextInputError('#project-path', '')
+    function setTextInputError (selector, message) {
+      const textInputErrorElem = document.querySelector(selector)
+        .nextElementSibling
+      textInputErrorElem.innerText = message
+    }
 
-  const projectAvatar = document.getElementById('project-avatar').value
-  const projectName = document.getElementById('project-name').value
-  const projectDescription = document.getElementById('project-description')
-    .value
-  const projectPath = document.getElementById('project-path').value
-  const realProjectPath = join(projectPath, projectName)
+    const projectAvatar = document.getElementById('project-avatar').value
+    const projectName = document.getElementById('project-name').value
+    const projectDescription = document.getElementById('project-description')
+      .value
+    const projectPath = document.getElementById('project-path').value
+    const realProjectPath = join(projectPath, projectName)
 
-  if (!projectAvatar) {
-    setTextInputError('#project-avatar', 'Please fill out this field.')
-  } else if (!projectName) {
-    setTextInputError('#project-name', 'Please fill out this field.')
-  } else if (!projectDescription) {
-    setTextInputError('#project-description', 'Please fill out this field.')
-  } else if (!projectPath) {
-    setTextInputError('#project-path', 'Please fill out this field.')
-  } else {
     if (!(await pathExists(projectPath))) {
       setTextInputError('#project-path', 'Invalid path.')
     } else if (await pathExists(realProjectPath)) {
@@ -79,35 +70,31 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
       const loadingScreenMessageElem = loadingScreenElem.querySelector('p')
 
       const formElem = document.querySelector('form')
-      formElem.style.transition = '200ms'
+      formElem.style.transition = 'opacity 200ms, filter 200ms'
       formElem.style.opacity = '0.3'
       formElem.style.filter = 'blur(3px)'
       formElem.style.pointerEvents = 'none'
       formElem.style.userSelect = 'none'
-
       document.body.appendChild(loadingScreenElem)
 
       setTimeout(async () => {
         await mkdir(realProjectPath)
         await copy(
-          window.env.appPath + '/node_modules/@discord-bot-creator/bot/bot.js',
+          join(window.env.appPath, 'node_modules', '@discord-bot-creator', 'bot', 'bot.js'),
           join(realProjectPath, 'bot.js')
         )
         await copy(
-          window.env.appPath +
-            '/node_modules/@discord-bot-creator/bot/storage.json',
+          join(window.env.appPath, 'node_modules', '@discord-bot-creator', 'bot', 'storage.json'),
           join(realProjectPath, 'storage.json')
         )
         await copy(
-          window.env.appPath +
-            '/node_modules/@discord-bot-creator/bot/package-template.json',
+          join(window.env.appPath, 'node_modules', '@discord-bot-creator', 'bot', 'package-template.json'),
           join(realProjectPath, 'package.json')
         )
 
         setTimeout(async () => {
           loadingScreenMessageElem.innerText = 'Downloading dependencies'
           await exec(window.env.npm + ' i', { cwd: realProjectPath })
-
           const storage = JSON.parse(
             await readFile(join(realProjectPath, 'storage.json'), 'utf-8')
           )
@@ -118,7 +105,6 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
             JSON.stringify(storage),
             'utf-8'
           )
-
           const projects =
             (await ipcRenderer.invoke('store-get', 'projects')) || {}
           projects.working = {
@@ -132,7 +118,6 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
           })
           projects.others = otherProjects
           ipcRenderer.send('store-set', 'projects', projects)
-
           ipcRenderer.send('creating-project-modal-hide')
           ipcRenderer.send('creating-project-modal-reload')
           ipcRenderer.send('start-window-hide')
@@ -140,5 +125,4 @@ document.querySelectorAll('button')[1].onclick = async (event) => {
         }, 1000)
       }, 200)
     }
-  }
-}
+  })

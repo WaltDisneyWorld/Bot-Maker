@@ -10,7 +10,7 @@ import { join } from 'path'
 import * as Store from 'electron-store'
 import { pathExists } from 'fs-extra'
 
-import { DBCProjects } from './interfaces'
+import { DBCProjects } from '../interfaces'
 
 app.once('ready', () => {
   const loadWindow = new BrowserWindow({
@@ -18,8 +18,8 @@ app.once('ready', () => {
     center: true,
     frame: false,
     resizable: false,
-    icon: join(__dirname, '/resources/icon.png'),
-    title: 'Loading | Discord Bot Creator',
+    icon: join(__dirname, '..', 'resources', 'icon.png'),
+    title: 'Discord Bot Creator | Loading',
     width: 250,
     height: 255,
     webPreferences: {
@@ -31,7 +31,7 @@ app.once('ready', () => {
     center: true,
     resizable: false,
     autoHideMenuBar: true,
-    icon: join(__dirname, '/resources/icon.png'),
+    icon: join(__dirname, '..', 'resources', 'icon.png'),
     title: 'Discord Bot Creator',
     width: 610,
     height: 300,
@@ -39,15 +39,14 @@ app.once('ready', () => {
       nodeIntegration: true
     }
   })
-  const creatingProjctModal = new BrowserWindow({
+  const creatingProjectModal = new BrowserWindow({
     show: false,
     center: true,
-    resizable: false,
     modal: true,
     parent: startWindow,
     autoHideMenuBar: true,
-    icon: join(__dirname, '/resources/icon.png'),
-    title: 'Discord Bot Creator | Creating Project',
+    icon: join(__dirname, '..', 'resources', 'icon.png'),
+    title: 'Creating Project',
     width: 480,
     height: 640,
     webPreferences: {
@@ -58,7 +57,7 @@ app.once('ready', () => {
     show: false,
     center: true,
     autoHideMenuBar: true,
-    icon: join(__dirname, '/resources/icon.png'),
+    icon: join(__dirname, '..', 'resources', 'icon.png'),
     title: 'Discord Bot Creator | Project Panel',
     webPreferences: {
       nodeIntegration: true
@@ -67,29 +66,29 @@ app.once('ready', () => {
 
   const DBCStore = new Store()
 
-  loadWindow.loadFile(join(__dirname, '/renderer/pages/load.html'))
+  loadWindow.loadFile(join(__dirname, '..', 'renderer', 'pages', 'load.html'))
   loadWindow.webContents.once('did-finish-load', () => loadWindow.show())
 
   startWindow.on('close', () => {
-    creatingProjctModal.destroy()
+    creatingProjectModal.destroy()
     projectPanelWindow.destroy()
   })
-  creatingProjctModal.on('close', (e) => {
+  creatingProjectModal.on('close', (e) => {
     e.preventDefault()
-    creatingProjctModal.hide()
+    creatingProjectModal.hide()
   })
   projectPanelWindow.on('close', () => {
     startWindow.destroy()
-    creatingProjctModal.destroy()
+    creatingProjectModal.destroy()
   })
 
   ipcMain.once('dbc-loaded', async () => {
-    startWindow.loadFile(join(__dirname, '/renderer/pages/start.html'))
+    startWindow.loadFile(join(__dirname, '..', 'renderer', 'pages', 'start.html'))
     startWindow.webContents.once('did-finish-load', () => {
-      creatingProjctModal.loadFile(
-        join(__dirname, '/renderer/pages/creatingProject.html')
+      creatingProjectModal.loadFile(
+        join(__dirname, '..', 'renderer', 'pages', 'creatingProject.html')
       )
-      creatingProjctModal.webContents.once('did-finish-load', async () => {
+      creatingProjectModal.webContents.once('did-finish-load', async () => {
         const projects = DBCStore.get<any, DBCProjects>('projects')
 
         if (projects && projects.working) {
@@ -101,7 +100,7 @@ app.once('ready', () => {
             startWindow.show()
           } else {
             projectPanelWindow.loadFile(
-              join(__dirname, '/renderer/pages/projectPanel.html')
+              join(__dirname, '..', 'renderer', 'pages', 'projectPanel.html')
             )
             projectPanelWindow.webContents.once('did-finish-load', () => {
               loadWindow.close()
@@ -119,7 +118,7 @@ app.once('ready', () => {
   ipcMain.on('load-window-close', () => loadWindow.close())
   ipcMain.on('project-panel-window-show', () => {
     projectPanelWindow.loadFile(
-      join(__dirname, '/renderer/pages/projectPanel.html')
+      join(__dirname, '..', 'renderer', 'pages', 'projectPanel.html')
     )
     projectPanelWindow.webContents.once('did-finish-load', () =>
       projectPanelWindow.show()
@@ -128,10 +127,10 @@ app.once('ready', () => {
   ipcMain.on('project-panel-window-close', () => {
     projectPanelWindow.close()
   })
-  ipcMain.on('creating-project-modal-show', () => creatingProjctModal.show())
-  ipcMain.on('creating-project-modal-hide', () => creatingProjctModal.hide())
+  ipcMain.on('creating-project-modal-show', () => creatingProjectModal.show())
+  ipcMain.on('creating-project-modal-hide', () => creatingProjectModal.hide())
   ipcMain.on('creating-project-modal-reload', () =>
-    creatingProjctModal.reload()
+    creatingProjectModal.reload()
   )
   ipcMain.handle('get-app-path', () => {
     return app.getAppPath()
@@ -139,11 +138,26 @@ app.once('ready', () => {
   ipcMain.handle(
     'open-directory-dialog-with-creating-project-modal',
     async () => {
-      return await dialog.showOpenDialog(creatingProjctModal, {
+      return await dialog.showOpenDialog(creatingProjectModal, {
         properties: ['openDirectory']
       })
     }
   )
+  ipcMain.on('create-modal', (_, title, content) => {
+    const modal = new BrowserWindow({
+      center: true,
+      autoHideMenuBar: true,
+      icon: join(__dirname, '..', 'resources', 'icon.png'),
+      title,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    })
+    modal.loadFile(join(__dirname, '..', 'renderer', 'views', 'modal.html'))
+    modal.webContents.once('did-finish-load', () => {
+      modal.webContents.send('update-modal', title, content)
+    })
+  })
   ipcMain.handle('show-notification', (_, options) =>
     new Notification(options).show()
   )

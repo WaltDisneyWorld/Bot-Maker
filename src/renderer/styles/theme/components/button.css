@@ -1,0 +1,298 @@
+@import '../colors.css';
+
+:root {
+  --button-purple: var(--purple);
+  --button-purple-active: #ab73ff;
+  --button-white: #fff;
+  --button-white-active: #d1d1d1;
+  --button-red: var(--red);
+  --button-red-active: #eb4e4e;
+  --button-green: var(--green);
+  --button-green-active: #3bb75c;
+  --button-yellow: var(--yellow);
+  --button-yellow-active: #d8e081;
+  --button-orange: var(--orange);
+  --button-orange-active: #dda160;
+  --button-pink: var(--pink);
+  --button-pink-active: #be5a94;
+  --button-cyan: var(--cyan);
+  --button-cyan-active: #65adbd;
+  --button-content-color: #000;
+  --button-content-color-hover: #000;
+  --button-content-color-active: #fff;
+  --button-white-content-color: #000;
+  --button-white-content-color-hover: #000;
+  --button-white-content-color-active: #000;
+  --button-yellow-content-color: #000;
+  --button-yellow-content-color-hover: #000;
+  --button-yellow-content-color-active: #000;
+  --button-svg-color: #000;
+}
+
+button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: var(--button-purple);
+  color: var(--button-content-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 100ms, color 100ms;
+}
+
+button:active {
+  background-color: var(--button-purple-active);
+  color: var(--button-content-color-active);
+}
+
+button svg {
+  width: 13px;
+  height: 13px;
+  margin-right: 10px;
+  fill: var(--button-svg-color);
+  transition: fill 100ms;
+}
+
+button:active svg {
+  fill: var(--button-content-color-active);
+}
+
+button[color='white']:active svg {
+  fill: var(--button-white-content-color-active);
+}
+
+button[variant='outlined'] {
+  padding: 9.5px 18px;
+  background: transparent !important;
+  color: var(--button-purple);
+  border: 1px solid var(--button-purple);
+}
+
+button[variant='outlined']:hover {
+  background-color: var(--button-purple) !important;
+  color: var(--button-content-color-hover);
+}
+
+button[variant='outlined']:active {
+  background-color: var(--button-purple-active) !important;
+  color: var(--button-content-color-active);
+}
+
+button[variant='outlined'] svg {
+  fill: var(--button-purple);
+}
+
+button[variant='outlined']:hover svg {
+  fill: var(--button-content-color-hover) !important;
+}
+
+button[variant='outlined']:active svg {
+  fill: var(--button-content-color-active) !important;
+}
+
+button[color='white'] {
+  background-color: var(--button-white);
+  color: var(--button-white-content-color);
+}
+
+button[color='white']:active {
+  background-color: var(--button-white-active);
+  color: var(--button-white-content-color-active);
+}
+
+button[color='red'] {
+  background-color: var(--button-red);
+}
+
+button[color='red']:active {
+  background-color: var(--button-red-active);
+}
+
+button[color='green'] {
+  background-color: var(--button-green);
+}
+
+button[color='green']:active {
+  background-color: var(--button-green-active);
+}
+
+button[color='yellow'] {
+  background-color: var(--button-yellow);
+}
+
+button[color='yellow']:active {
+  background-color: var(--button-yellow-active);
+  color: var(--button-yellow-content-color-active);
+}
+
+button[color='orange'] {
+  background-color: var(--button-orange);
+}
+
+button[color='orange']:active {
+  background-color: var(--button-orange-active);
+}
+
+button[color='pink'] {
+  background-color: var(--button-pink);
+}
+
+button[color='pink']:active {
+  background-color: var(--button-pink-active);
+}
+
+button[color='cyan'] {
+  background-color: var(--button-cyan);
+}
+
+button[color='cyan']:active {
+  background-color: var(--button-cyan-active);
+}
+
+button[color='blue'] {
+  background-color: var(--buttonBlue);
+}
+
+button[color='blue']:active {
+  background-color: var(--buttonBlueActive);
+}
+
+button[variant='outlined'][color='white'] {
+  color: var(--button-white);
+  border-color: var(--button-white);
+}
+
+button[variant='outlined'][color='white']:hover {
+  background-color: var(--button-white) !important;
+  color: var(--button-white-content-color-hover);
+}
+
+button[variant='outlined'][color='white']:active {
+  background-color: var(--button-white-active) !important;
+  color: var(--button-white-content-color-active);
+}
+
+button[variant='outlined'][color='white'] svg {
+  fill: var(--button-white);
+}
+
+button[variant='outlined'][color='white']:hover svg {
+  fill: var(--button-white-content-color-active) !important;
+}
+
+button[variant='outlined'][color='red'] {
+  color: var(--button-red);
+  border: 1px solid var(--button-red);
+}
+
+button[variant='outlined'][color='red']:hover {
+  background-color: var(--button-red) !important;
+  color: var(--button-content-color);
+}
+
+button[variant='outlined'][color='red']:active {
+  background-color: var(--button-red-active) !important;
+  color: var(--button-content-color-active);
+}
+
+button[variant='outlined'][color='red'] svg {
+  fill: var(--button-red);
+}
+
+button[variant='outlined'][color='green'] {
+  color: var(--button-green);
+  border-color: var(--button-green);
+}
+
+button[variant='outlined'][color='green']:hover {
+  background-color: var(--button-green) !important;
+  color: var(--button-content-color);
+}
+
+button[variant='outlined'][color='green']:active {
+  background-color: var(--button-green-active) !important;
+  color: var(--button-content-color-active);
+}
+
+button[variant='outlined'][color='green'] svg {
+  fill: var(--button-green);
+}
+
+button[variant='outlined'][color='yellow'] {
+  color: var(--button-yellow);
+  border-color: var(--button-yellow);
+}
+
+button[variant='outlined'][color='yellow']:hover {
+  background-color: var(--button-yellow) !important;
+  color: var(--button-yellow-content-color-hover);
+}
+
+button[variant='outlined'][color='yellow']:active {
+  background-color: var(--button-yellow-active) !important;
+  color: var(--button-yellow-content-color-active);
+}
+
+button[variant='outlined'][color='yellow'] svg {
+  fill: var(--button-yellow);
+}
+
+button[variant='outlined'][color='orange'] {
+  color: var(--button-orange);
+  border-color: var(--button-orange);
+}
+
+button[variant='outlined'][color='orange']:hover {
+  background-color: var(--button-orange) !important;
+  color: var(--button-content-color-hover);
+}
+
+button[variant='outlined'][color='orange']:active {
+  background-color: var(--button-orange-active) !important;
+  color: var(--button-content-color-active);
+}
+
+button[variant='outlined'][color='orange'] svg {
+  fill: var(--button-orange);
+}
+
+button[variant='outlined'][color='pink'] {
+  color: var(--button-pink);
+  border-color: var(--button-pink);
+}
+
+button[variant='outlined'][color='pink']:hover {
+  background-color: var(--button-pink) !important;
+  color: var(--button-content-color-hover);
+}
+
+button[variant='outlined'][color='pink']:active {
+  background-color: var(--button-pink-active) !important;
+  color: var(--button-content-color-active);
+}
+
+button[variant='outlined'][color='pink'] svg {
+  fill: var(--button-pink);
+}
+
+button[variant='outlined'][color='cyan'] {
+  color: var(--button-cyan);
+  border-color: var(--button-cyan);
+}
+
+button[variant='outlined'][color='cyan']:hover {
+  background-color: var(--button-cyan) !important;
+  color: var(--button-content-color-hover);
+}
+
+button[variant='outlined'][color='cyan']:active {
+  background-color: var(--button-cyan-active) !important;
+  color: var(--button-content-color-active);
+}
+
+button[variant='outlined'][color='cyan'] svg {
+  fill: var(--button-cyan);
+}

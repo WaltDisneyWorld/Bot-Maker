@@ -1,0 +1,16 @@
+@import '../colors.css';
+
+:root {
+  --project-panel-menu-bg: #21222c;
+  --project-panel-menu-project-info-bg: var(--blue);
+  --project-panel-menu-project-avatar-border-color: #fff;
+  --project-panel-menu-project-info-offline-border-color: #fff;
+  --project-panel-menu-project-info-starting-border-color: var(--purple);
+  --project-panel-menu-project-info-online-border-color: var(--green);
+  --project-panel-menu-project-info-error-border-color: var(--red);
+  --project-panel-sections-menu-hover-bg: #44475a;
+  --project-panel-sections-menu-active-bg: #343546;
+
+  --project-panel-config-intents-bg: #21222c;
+  --project-panel-config-intents-border-color: var(--purple);
+}

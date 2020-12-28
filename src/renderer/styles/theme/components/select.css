@@ -1,0 +1,34 @@
+@import '../colors.css';
+
+:root {
+  --select-input-label-color: #afafaf;
+  --select-input-bg: #22222c;
+  --select-input-color: #fff;
+  --select-input-border-color: var(--purple);
+  --select-input-focus-bg: #1c1c23;
+  --select-input-focus-color: var(--pink);
+}
+
+.select {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.select label {
+  margin-left: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--select-input-label-color);
+}
+
+.select select {
+  padding: 10px;
+  border: 2px solid var(--select-input-border-color);
+  border-radius: 3px;
+  background-color: var(select-input-bg);
+  color: var(--select-input-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 100ms, color 100ms, border-color 100ms;
+}

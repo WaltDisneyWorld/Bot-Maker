@@ -1,7 +1,8 @@
 /*! Copyright (c) Discord Bot Creator. */
 
 form {
-  width: 85%;
+  padding: 40px;
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -9,35 +10,21 @@ form {
 }
 
 form img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  width: 120px;
+  height: 120px;
   border-radius: 100%;
 }
 
-form .text-input {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-form div:nth-child(5) {
-  width: 100%;
-}
-
-form div:nth-child(5) .text-input {
-  width: 320%;
-}
-
-form div:nth-child(5) button {
-  height: 40px;
-  margin-top: 23px;
-  margin-left: 10px;
+form .text-input label {
+  font-size: 1.5rem;
+  font-weight: 200;
 }
 
 form button {
-  width: 100%;
-  margin-top: 3px;
+  margin-top: 30px;
   padding: 15px;
+  width: 100%;
 }
 
 #loading-screen {

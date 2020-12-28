@@ -20,7 +20,7 @@ export default function menu () {
 
     projectControlElem.classList.add('fadeInRight-200')
     projectAvatarElem.style.border =
-      '3px solid var(--projectPanelMenuProjectAvatarBorderColor)'
+      '3px solid var(--project-panel-menu-project-avatar-border-color)'
     projectControlElem.style.display = 'flex'
 
     document.onclick = (event) => {
@@ -43,9 +43,9 @@ export default function menu () {
   projectControlElem.querySelectorAll('button')[0].onclick = () => {
     if (window.bot.status !== 'online') {
       projectInfoElem.style.borderColor =
-        'var(--projectPanelMenuProjectInfoStartingBorderColor)'
+        'var(--project-panel-menu-project-info-starting-border-color)'
       projectControlElem.style.borderColor =
-        'var(--projectPanelMenuProjectInfoStartingBorderColor)'
+        'var(--project-panel-menu-project-info-starting-border-color)'
       window.bot.process = childProcess.spawn(
         window.env.node,
         [join(window.project.path, 'bot.js')],
@@ -58,9 +58,9 @@ export default function menu () {
         if (data.includes('Bot started')) {
           window.bot.status = 'online'
           projectInfoElem.style.borderColor =
-            'var(--projectPanelMenuProjectInfoOnlineBorderColor)'
+            'var(--project-panel-menu-project-info-online-border-color)'
           projectControlElem.style.borderColor =
-            'var(--projectPanelMenuProjectInfoOnlineBorderColor)'
+            'var(--project-panel-menu-project-info-online-border-color)'
         }
       })
     }
@@ -72,9 +72,9 @@ export default function menu () {
       window.bot.process.kill()
       window.bot.status = 'offline'
       projectInfoElem.style.borderColor =
-        'var(--projectPanelMenuProjectInfoOfflineBorderColor)'
+        'var(--project-panel-menu-project-info-offline-border-color)'
       projectControlElem.style.borderColor =
-        'var(--projectPanelMenuProjectInfoOfflineBorderColor)'
+        'var(--project-panel-menu-project-info-offline-border-color)'
     }
   }
 
@@ -99,7 +99,7 @@ export default function menu () {
       }
 
       sectionMenuElem.style.backgroundColor =
-        'var(--projectPanelSectionsMenuActiveBg)'
+        'var(--project-panel-sections-menu-active-bg)'
 
       const sectionElems = document.querySelectorAll('#sections > div')
       for (const sectionElem of sectionElems) {

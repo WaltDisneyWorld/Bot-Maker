@@ -1,0 +1,30 @@
+<!--! Copyright (c) Discord Bot Creator. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discord Bot Creator</title>
+    <link rel="stylesheet" href="../styles/theme/theme.css" />
+    <link rel="stylesheet" href="../styles/views/modal.css" />
+  </head>
+  <body>
+    <div class="column">
+      <div id="content"></div>
+      <div class="row justify-content-end">
+        <button color="pink">Ok</button>
+      </div>
+    </div>
+    <script>
+      const { ipcRenderer } = require('electron')
+      ipcRenderer.on('update-modal', (_, title, content) => {
+        document.title = title
+        document.getElementById('content').innerHTML = content
+      })
+    </script>
+  </body>
+</html>

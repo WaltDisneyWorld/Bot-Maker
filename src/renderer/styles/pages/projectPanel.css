@@ -5,15 +5,16 @@ menu {
   position: fixed;
   width: 60px;
   height: 100%;
-  background-color: var(--projectPanelMenuBg);
+  background-color: var(--project-panel-menu-bg);
 }
 
 menu > div:nth-child(1) {
   padding: 10px;
   display: flex;
   justify-content: center;
-  background-color: var(--projectPanelMenuProjectInfoBg);
-  border-bottom: 5px solid var(--projectPanelMenuProjectInfoOfflineBorderColor);
+  background-color: var(--project-panel-menu-project-info-bg);
+  border-bottom: 5px solid
+    var(--project-panel-menu-project-info-offline-border-color);
   transition: border-color 200ms;
 }
 
@@ -22,7 +23,7 @@ menu > div:nth-child(1) img {
   width: 45px;
   height: 45px;
   border-radius: 100%;
-  border: 2px solid var(--projectPanelMenuProjectAvatarBorderColor);
+  border: 2px solid var(--project-panel-menu-project-avatar-border-color);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -38,8 +39,9 @@ menu > div:nth-child(1) div {
   top: 0;
   left: 60px;
   border-radius: 0 0 5px 0;
-  background-color: var(--projectPanelMenuProjectInfoBg);
-  border-bottom: 5px solid var(--projectPanelMenuProjectInfoOfflineBorderColor);
+  background-color: var(--project-panel-menu-project-info-bg);
+  border-bottom: 5px solid
+    var(--project-panel-menu-project-info-offline-border-color);
   transition: border-color 200ms;
 }
 
@@ -60,7 +62,7 @@ menu > div:nth-child(2) div {
 }
 
 menu > div:nth-child(2) div:hover {
-  background-color: var(--projectPanelSectionsMenuHoverBg);
+  background-color: var(--project-panel-sections-menu-hover-bg);
 }
 
 menu > div:nth-child(2) div svg {
@@ -86,7 +88,7 @@ menu > div:nth-child(2) div svg {
 }
 
 #config-main .text-input {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 #config-main div div:nth-child(1) {
@@ -106,8 +108,8 @@ menu > div:nth-child(2) div svg {
   width: fit-content;
   padding: 13px;
   border-radius: 3px;
-  background-color: var(--projectPanelConfigIntentsBg);
-  border: 2px solid var(--projectPanelConfigIntentsBorderColor);
+  background-color: var(--project-panel-config-intents-bg);
+  border: 2px solid var(--project-panel-config-intents-border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 

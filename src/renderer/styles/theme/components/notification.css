@@ -1,0 +1,10 @@
+@import '../colors.css';
+
+:root {
+  --notification-bg: #21222c;
+  --notification-close-bg: #44475a;
+  --notification-info-color: var(--cyan);
+  --notification-success-color: var(--green);
+  --notification-error-color: var(--red);
+  --notification-alert-color: var(--yellow);
+}

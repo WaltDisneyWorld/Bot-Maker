@@ -1,0 +1,47 @@
+@import '../colors.css';
+
+:root {
+  --text-input-label-color: #afafaf;
+  --text-input-bg: #22222c;
+  --text-input-color: #fff;
+  --text-input-border-color: var(--purple);
+  --text-input-focus-bg: #1c1c23;
+  --text-input-focus-color: var(--pink);
+}
+
+.text-input {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-input label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--text-input-label-color);
+}
+
+.text-input input[type='text'],
+.text-input input[type='password'] {
+  padding: 10px;
+  border: 2px solid var(--text-input-border-color);
+  border-radius: 3px;
+  background-color: var(--text-input-bg);
+  color: var(--text-input-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 100ms, color 100ms, border-color 100ms;
+}
+
+.text-input input[type='text']:focus,
+.text-input input[type='password']:focus {
+  background-color: var(--text-input-focus-bg);
+  border-color: var(--text-input-focus-color);
+}
+
+.text-input > span {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--red);
+}

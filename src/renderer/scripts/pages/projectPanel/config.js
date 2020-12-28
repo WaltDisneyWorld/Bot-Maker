@@ -109,26 +109,11 @@ export default function config () {
     }
   }
 
-  const projectAvatarImgElem = document.querySelector('img')
   projectAvatarElem.onchange = () => {
-    if (!projectAvatarElem.value) {
-      projectAvatarElem.nextSibling.nextSibling.innerText =
-        'Please fill out this field.'
-    } else {
-      projectAvatarElem.nextSibling.nextSibling.innerText = ''
-      window.bot.storage.config.avatar = projectAvatarElem.value
-      projectAvatarImgElem.src = projectAvatarElem.value
-    }
+    window.bot.storage.config.avatar = projectAvatarElem.value
   }
   projectDescriptionElem.onchange = () => {
-    if (!projectDescriptionElem.value) {
-      projectDescriptionElem.nextSibling.nextSibling.innerText =
-        'Please fill out this field.'
-    } else {
-      projectAvatarElem.nextSibling.nextSibling.innerText = ''
-      window.bot.storage.config.description = projectDescriptionElem.value
-      projectAvatarImgElem.title = `Name: ${window.project.name}\nDescription: ${window.bot.storage.config.description}`
-    }
+    window.bot.storage.config.description = projectDescriptionElem.value
   }
   projectBotOwnersElem.onchange = () => {
     window.bot.storage.config.owners = projectBotOwnersElem.value
@@ -136,22 +121,10 @@ export default function config () {
       : []
   }
   projectBotTokenElem.onchange = () => {
-    if (!projectBotTokenElem.value) {
-      projectBotTokenElem.nextSibling.nextSibling.innerText =
-        'Please fill out this field.'
-    } else {
-      projectAvatarElem.nextSibling.nextSibling.innerText = ''
-      window.bot.storage.config.token = projectBotTokenElem.value
-    }
+    window.bot.storage.config.token = projectBotTokenElem.value
   }
   projectBotPrefixElem.onchange = () => {
-    if (!projectBotPrefixElem.value) {
-      projectBotPrefixElem.nextSibling.nextSibling.innerText =
-        'Please fill out this field.'
-    } else {
-      projectBotPrefixElem.nextSibling.nextSibling.innerText = ''
-      window.bot.storage.config.prefix = projectBotPrefixElem.value
-    }
+    window.bot.storage.config.prefix = projectBotPrefixElem.value
   }
   projectBotCaseSensitiveElem.onchange = () => {
     window.bot.storage.config.caseSensitive =

@@ -1,0 +1,20 @@
+:root {
+  --checkbox-label-color: #fff;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox label {
+  cursor: pointer;
+  user-select: none;
+  margin-left: 10px;
+  font-size: 13px;
+  color: var(--checkbox-label-color);
+}
+
+.checkbox input[type='checkbox'] {
+  cursor: pointer;
+}

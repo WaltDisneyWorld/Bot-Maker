@@ -7,6 +7,6 @@
 
 const { ipcRenderer } = require('electron')
 
-document.querySelectorAll('button')[0].onclick = () => {
+document.querySelectorAll('button')[0].addEventListener('click', () => {
   ipcRenderer.send('creating-project-modal-show')
-}
+})
